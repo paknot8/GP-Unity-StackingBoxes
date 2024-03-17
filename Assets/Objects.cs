@@ -2,17 +2,19 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Triangle : MonoBehaviour
+public class Objects : MonoBehaviour
 {
     public float moveSpeed = 5f;
     [NonSerialized] private Vector2 movementInput;
-    private Rigidbody rb; // Reference to Rigidbody component
+    private Rigidbody rb;
+   
+    public GameObject squarePrefab; // Reference to the Square prefab
+    public GameObject trianglePrefab; // Reference to the Triangle prefab
 
     void Start()
     {
-        // Get the reference to the Rigidbody component
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false; // Disable gravity by default
+        rb.useGravity = false;
     }
 
     void Update()
@@ -22,11 +24,20 @@ public class Triangle : MonoBehaviour
 
     void Move()
     {
-        // Calculate movement direction
         Vector2 moveDirection = new(movementInput.x, 0f);
-
-        // Move the object
         transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
+    }
+
+    void SpawnSquare()
+    {
+        // Spawn the Square prefab at position (2, 0.4, 0)
+        Instantiate(squarePrefab, new Vector3(2f, 0.4f, 0f), Quaternion.identity);
+    }
+
+    void SpawnTriangle()
+    {
+        // Spawn the Triangle prefab at position (2, 0.4, 0) with an offset of 2 units along the x-axis
+        Instantiate(trianglePrefab, new Vector3(4f, 0.4f, 0f), Quaternion.identity);
     }
 
     void OnTriggerEnter(Collider other)
@@ -34,9 +45,10 @@ public class Triangle : MonoBehaviour
         Debug.Log("Entered Collision");
         if (other.CompareTag("GameOverLine"))
         {
-            // Destroy the object
             Destroy(gameObject);
         }
+        SpawnSquare();
+        SpawnTriangle();
     }
 
     void OnMove(InputValue value)
@@ -48,7 +60,6 @@ public class Triangle : MonoBehaviour
     {
         if (value.isPressed)
         {
-            // Enable gravity when the drop button is pressed
             rb.useGravity = true;
         }
     }
