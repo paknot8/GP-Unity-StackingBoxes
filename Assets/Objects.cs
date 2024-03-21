@@ -9,6 +9,7 @@ public class Objects : MonoBehaviour
     private Rigidbody rb;
     private Vector3 initialPosition; // Store the initial position of the square
     private bool isDropped = false; // Flag to indicate whether the square has been dropped
+    private bool isStacked = false; // Flag to indicate whether the square has stacked on another square
 
     public GameObject squarePrefab; // Reference to the Square prefab
 
@@ -21,7 +22,7 @@ public class Objects : MonoBehaviour
 
     void Update()
     {
-        if (!isDropped) // Only move if the square has not been dropped
+        if (!isDropped && !isStacked) // Only move if the square has not been dropped and has not stacked
         {
             Move();
         }
@@ -33,6 +34,69 @@ public class Objects : MonoBehaviour
         transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered Collision");
+        if (other.CompareTag("GameOverLine"))
+        {
+            Destroy(gameObject);
+        }
+        else if (!isDropped && !isStacked) // Check if the square has not been dropped and has not stacked
+        {
+            // Stack the new square on top of the previously dropped square
+            StackSquare();
+        }
+    }
+
+    void StackSquare()
+    {
+        // Calculate the position to stack the new square
+        Vector3 stackPosition = transform.position + Vector3.up;
+
+        // Align the new square with the stacked position
+        transform.position = new Vector3(stackPosition.x, transform.position.y, transform.position.z);
+
+        // Set the dropped flag to true and the stacked flag to true
+        isDropped = true;
+        isStacked = true;
+
+        // Spawn the new square
+        SpawnSquare(initialPosition);
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Stackable")) // Check if the collision is with a stackable object
+        {
+            isStacked = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Stackable")) // Check if the collision with a stackable object ends
+        {
+            isStacked = false;
+        }
+    }
+
+    void OnMove(InputValue value)
+    {
+        if (!isDropped && !isStacked) // Only respond to movement controls if the square has not been dropped and has not stacked
+        {
+            movementInput = value.Get<Vector2>();
+        }
+    }
+
+    void OnDrop(InputValue value)
+    {
+        if (value.isPressed && !isDropped) // Only drop if the square has not been dropped
+        {
+            rb.useGravity = true;
+            isDropped = true; // Set the flag to true indicating that the square has been dropped
+        }
+    }
+
     void SpawnSquare(Vector3 position)
     {
         // Spawn the Square prefab at the given position
@@ -41,37 +105,6 @@ public class Objects : MonoBehaviour
         if (newSquareRb != null)
         {
             newSquareRb.velocity = Vector3.zero;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Entered Collision");
-        if (other.CompareTag("GameOverLine"))
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Spawn the new square at the initial position
-            SpawnSquare(initialPosition);
-        }
-    }
-
-    void OnMove(InputValue value)
-    {
-        if (!isDropped) // Only respond to movement controls if the square has not been dropped
-        {
-            movementInput = value.Get<Vector2>();
-        }
-    }
-
-    void OnDrop(InputValue value)
-    {
-        if (value.isPressed)
-        {
-            rb.useGravity = true;
-            isDropped = true; // Set the flag to true indicating that the square has been dropped
         }
     }
 }

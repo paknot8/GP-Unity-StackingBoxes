@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Objects
   - GameOverLine
+  - Stackable
   layers:
   - Default
   - TransparentFX
