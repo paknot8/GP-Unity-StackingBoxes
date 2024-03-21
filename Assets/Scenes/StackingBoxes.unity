@@ -628,8 +628,9 @@ MonoBehaviour:
   blockPrefab: {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
   blockHolder: {fileID: 1231895370}
   LivesText: {fileID: 701909060}
-  movement: {x: 0, y: 0}
-  blockSpeed: 1
+  vector: {x: 0, y: 0}
+  movement: {x: 0, y: 0, z: 0}
+  blockSpeed: 3
   blockSpeedIncrement: 0.5
   blockDirection: 1
   xLimit: 2

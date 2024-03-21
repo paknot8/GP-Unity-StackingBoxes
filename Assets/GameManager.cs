@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     private Transform currentBlock = null;
     private Rigidbody2D currentRigidbody;
 
-    private Vector2 BlockStartPosition = new Vector2(0f,2f);
+    private Vector2 BlockStartPosition = new(0f,2f);
 
-    private Vector3 direction;
-    public Vector2 movement;
+    public Vector2 vector;
+    public Vector3 movement;
 
     [SerializeField] private float blockSpeed = 1f;
     [SerializeField] private float blockSpeedIncrement = 0.5f;
@@ -67,14 +67,13 @@ public class GameManager : MonoBehaviour
 
     private void Movement()
     {
-        // Calculate movement direction based on input
-        Vector2 moveDirection = new(movement.x, movement.y);
+        // Calculate movement direction
+        //Vector2 moveDirection = new Vector2(movementInput.x, 0f);
+        // Calculate movement direction
+        movement = new(vector.x,0);
 
-        // Normalize the direction vector to ensure consistent speed
-        moveDirection.Normalize();
-
-        // Apply movement using Rigidbody velocity
-        currentBlock.position = moveDirection * blockSpeed;
+        // Move the object
+        transform.Translate(blockSpeed * Time.deltaTime * movement);
         
 
         //BlockMovement();
@@ -135,7 +134,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnMove(InputValue value){
-        movement = value.Get<Vector2>();
+        vector = value.Get<Vector2>();
     }
 
     void OnDrop(InputValue value)
