@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    // For the placeholders in the inspector
     [SerializeField] private Transform blockPrefab;
     [SerializeField] private Transform blockHolder;
+
+    [SerializeField] private TMPro.TextMeshProUGUI LivesText; // reference to TextMesh Pro
 
     private Transform currentBlock = null;
     private Rigidbody2D currentRigidbody;
@@ -20,9 +23,16 @@ public class GameManager : MonoBehaviour
 
     private float timeBetweenRounds = 1f;
 
+    // Varaibles to handle the game state.
+    private int startingLives = 3;
+    private int livesRemaining;
+    private bool playing = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        livesRemaining = startingLives;
+        LivesText.text = $"{livesRemaining}"; // to update the Textmesh pro text
         SpawnNewBlock();
     }
 
@@ -55,6 +65,7 @@ public class GameManager : MonoBehaviour
                 blockDirection = -blockDirection;
             }
 
+            // drop item
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // Stop it moving.
@@ -64,6 +75,22 @@ public class GameManager : MonoBehaviour
                 // Spawn the next block.
                 StartCoroutine(DelayedSpawn());
             }
+        }
+
+        // for restart game
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+    }
+
+    // Called from LoseLife whenever it detects a block has fallen off.
+    public void RemoveLife(){
+        // Update the lives remainnig UI element
+        livesRemaining = Mathf.Max(livesRemaining -1, 0);
+        LivesText.text = $"{livesRemaining}";
+        // Check for end of game
+        if (livesRemaining == 0){
+            playing = false;
         }
     }
 
