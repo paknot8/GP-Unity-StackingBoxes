@@ -628,6 +628,12 @@ MonoBehaviour:
   blockPrefab: {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
   blockHolder: {fileID: 1231895370}
   LivesText: {fileID: 701909060}
+  movement: {x: 0, y: 0}
+  blockSpeed: 1
+  blockSpeedIncrement: 0.5
+  blockDirection: 1
+  xLimit: 2
+  timeBetweenRounds: 1
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0
@@ -682,6 +688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1231895370}
+  - component: {fileID: 1231895371}
   m_Layer: 0
   m_Name: BlockHolder
   m_TagString: Untagged
@@ -704,6 +711,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1231895371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231895369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 72ec9ad919736164ea577013399e1147, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1382017553
 GameObject:
   m_ObjectHideFlags: 0

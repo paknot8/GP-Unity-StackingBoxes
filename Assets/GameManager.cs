@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,14 +16,16 @@ public class GameManager : MonoBehaviour
     private Rigidbody2D currentRigidbody;
 
     private Vector2 BlockStartPosition = new Vector2(0f,2f);
-    private Vector3 move;
 
-    private float blockSpeed = 5f;
-    private float blockSpeedIncrement = 0.5f;
-    private float blockDirection = 1f;
-    private float xLimit = 2f;
+    private Vector3 direction;
+    public Vector2 movement;
 
-    private float timeBetweenRounds = 1f;
+    [SerializeField] private float blockSpeed = 1f;
+    [SerializeField] private float blockSpeedIncrement = 0.5f;
+    [SerializeField] private float blockDirection = 1f;
+    [SerializeField] private float xLimit = 2f;
+
+    [SerializeField] private float timeBetweenRounds = 1f;
 
     // Varaibles to handle the game state.
     private int startingLives = 3;
@@ -59,19 +62,31 @@ public class GameManager : MonoBehaviour
         Movement();
 
         // for restart game
-        NewMethod();
+        RestartGame();
     }
 
     private void Movement()
     {
-        // Vector3 movement = blockSpeed * Time.deltaTime * new Vector3(BlockStartPosition.x, 0, BlockStartPosition.y);
-        // transform.Translate(movement);
+        // Calculate movement direction based on input
+        Vector2 moveDirection = new(movement.x, movement.y);
 
-        // If we have a waiting block, move it about.
+        // Normalize the direction vector to ensure consistent speed
+        moveDirection.Normalize();
+
+        // Apply movement using Rigidbody velocity
+        currentBlock.position = moveDirection * blockSpeed;
+        
+
+        //BlockMovement();
+    }
+
+    private void BlockMovement()
+    {
         if (currentBlock)
         {
             float moveAmount = Time.deltaTime * blockSpeed * blockDirection;
-            currentBlock.position += new Vector3(moveAmount, 0, 0);
+            //currentBlock.position += new Vector3(moveAmount, 0, 0);
+
             // if we've gone as far as we want, reverse direction.
             if (Mathf.Abs(currentBlock.position.x) > xLimit)
             {
@@ -80,9 +95,26 @@ public class GameManager : MonoBehaviour
                 blockDirection = -blockDirection;
             }
         }
+
+
+        // if (currentBlock)
+        // {
+        //     float moveAmount = Time.deltaTime * blockSpeed * blockDirection;
+        //     //currentBlock.position += new Vector3(moveAmount, 0, 0);
+
+        //     // if we've gone as far as we want, reverse direction.
+        //     if (Mathf.Abs(currentBlock.position.x) > xLimit)
+        //     {
+        //         // Set to the limit so it doesn't go further.
+        //         currentBlock.position = new Vector3(blockDirection * xLimit, currentBlock.position.y, 0);
+        //         blockDirection = -blockDirection;
+        //     }
+        // }
     }
 
-    private void NewMethod()
+
+
+    private void RestartGame()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -91,7 +123,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Called from LoseLife whenever it detects a block has fallen off.
-    public void RemoveLife(){
+    public void RemoveLife()
+    {
         // Update the lives remainnig UI element
         livesRemaining = Mathf.Max(livesRemaining -1, 0);
         LivesText.text = $"{livesRemaining}";
@@ -102,7 +135,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnMove(InputValue value){
-        Vector2 movement = value.Get<Vector2>();
+        movement = value.Get<Vector2>();
     }
 
     void OnDrop(InputValue value)
