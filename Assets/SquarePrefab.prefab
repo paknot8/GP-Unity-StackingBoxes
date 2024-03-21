@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  prefabToSpawn: {fileID: 0}
+  squarePrefab: {fileID: 8468538996806724205}
 --- !u!114 &1300361213851419843
 MonoBehaviour:
   m_ObjectHideFlags: 0

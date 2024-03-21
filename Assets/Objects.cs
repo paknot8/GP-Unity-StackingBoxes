@@ -7,37 +7,41 @@ public class Objects : MonoBehaviour
     public float moveSpeed = 5f;
     [NonSerialized] private Vector2 movementInput;
     private Rigidbody rb;
-   
+    private Vector3 initialPosition; // Store the initial position of the square
+    private bool isDropped = false; // Flag to indicate whether the square has been dropped
+
     public GameObject squarePrefab; // Reference to the Square prefab
-    public GameObject trianglePrefab; // Reference to the Triangle prefab
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
+        initialPosition = transform.position; // Store the initial position when the object is spawned
     }
 
     void Update()
     {
-        Move();
+        if (!isDropped) // Only move if the square has not been dropped
+        {
+            Move();
+        }
     }
 
     void Move()
     {
-        Vector2 moveDirection = new(movementInput.x, 0f);
+        Vector2 moveDirection = new Vector2(movementInput.x, 0f);
         transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
     }
 
-    void SpawnSquare()
+    void SpawnSquare(Vector3 position)
     {
-        // Spawn the Square prefab at position (2, 0.4, 0)
-        Instantiate(squarePrefab, new Vector3(2f, 0.4f, 0f), Quaternion.identity);
-    }
-
-    void SpawnTriangle()
-    {
-        // Spawn the Triangle prefab at position (2, 0.4, 0) with an offset of 2 units along the x-axis
-        Instantiate(trianglePrefab, new Vector3(4f, 0.4f, 0f), Quaternion.identity);
+        // Spawn the Square prefab at the given position
+        GameObject newSquare = Instantiate(squarePrefab, position, Quaternion.identity);
+        Rigidbody newSquareRb = newSquare.GetComponent<Rigidbody>();
+        if (newSquareRb != null)
+        {
+            newSquareRb.velocity = Vector3.zero;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -47,13 +51,19 @@ public class Objects : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        SpawnSquare();
-        SpawnTriangle();
+        else
+        {
+            // Spawn the new square at the initial position
+            SpawnSquare(initialPosition);
+        }
     }
 
     void OnMove(InputValue value)
     {
-        movementInput = value.Get<Vector2>();
+        if (!isDropped) // Only respond to movement controls if the square has not been dropped
+        {
+            movementInput = value.Get<Vector2>();
+        }
     }
 
     void OnDrop(InputValue value)
@@ -61,6 +71,7 @@ public class Objects : MonoBehaviour
         if (value.isPressed)
         {
             rb.useGravity = true;
+            isDropped = true; // Set the flag to true indicating that the square has been dropped
         }
     }
 }
