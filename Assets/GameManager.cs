@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Rigidbody2D currentRigidbody;
 
     private Vector2 BlockStartPosition = new Vector2(0f,2f);
+    private Vector3 move;
 
     private float blockSpeed = 5f;
     private float blockSpeedIncrement = 0.5f;
@@ -54,31 +55,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        Movement();
+
+        // for restart game
+        NewMethod();
+    }
+
+    private void Movement()
+    {
+        // Vector3 movement = blockSpeed * Time.deltaTime * new Vector3(BlockStartPosition.x, 0, BlockStartPosition.y);
+        // transform.Translate(movement);
+
         // If we have a waiting block, move it about.
-        if (currentBlock){
+        if (currentBlock)
+        {
             float moveAmount = Time.deltaTime * blockSpeed * blockDirection;
             currentBlock.position += new Vector3(moveAmount, 0, 0);
             // if we've gone as far as we want, reverse direction.
-            if(Mathf.Abs(currentBlock.position.x) > xLimit){
+            if (Mathf.Abs(currentBlock.position.x) > xLimit)
+            {
                 // Set to the limit so it doesn't go further.
                 currentBlock.position = new Vector3(blockDirection * xLimit, currentBlock.position.y, 0);
                 blockDirection = -blockDirection;
             }
-
-            // drop item
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // Stop it moving.
-                currentBlock = null;
-                // Activate the RigidBody to enable gravity to drop it.
-                currentRigidbody.simulated = true;
-                // Spawn the next block.
-                StartCoroutine(DelayedSpawn());
-            }
         }
+    }
 
-        // for restart game
-        if (Input.GetKeyDown(KeyCode.Escape)){
+    private void NewMethod()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
@@ -94,20 +101,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // void OnMove(InputValue value){
-    //     Vector2 movement = value.Get<Vector2>();
-    // }
+    void OnMove(InputValue value){
+        Vector2 movement = value.Get<Vector2>();
+    }
 
-    // void OnDrop(InputValue value)
-    // {
-    //     if (value.isPressed)
-    //     {
-    //         // Stop it moving.
-    //         currentBlock = null;
-    //         // Activate the RigidBody to enable gravity to drop it.
-    //         currentRigidbody.simulated = true;
-    //         // Spawn the next block.
-    //         SpawnNewBlock();
-    //     }
-    // }
+    void OnDrop(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            // Stop it moving.
+            currentBlock = null;
+            // Activate the RigidBody to enable gravity to drop it.
+            currentRigidbody.simulated = true;
+            // Spawn the next block.
+            StartCoroutine(DelayedSpawn());
+        }
+    }
 }
