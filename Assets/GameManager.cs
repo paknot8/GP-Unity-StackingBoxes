@@ -124,16 +124,20 @@ public class GameManager : MonoBehaviour
 
     #region Menu
         void PauseGame(){
-            if(isPlaying){
+            if(isPlaying) {
                 Time.timeScale = 0f; // Pause the game
+                isPlaying = false;
             } else {
                 Time.timeScale = 1f; // UnPause the game
+                isPlaying = true;
             }
         }
     #endregion
 
     #region New Input System Input/Controls
-        void OnMove(InputValue value) => Debug.Log(vector = value.Get<Vector2>());
+        void OnMove(InputValue value){
+            Debug.Log(vector = value.Get<Vector2>());
+        }
 
         void OnDrop(InputValue value){
             if (value.isPressed && currentBlock != null) StopAndSpawnNext();
@@ -144,13 +148,7 @@ public class GameManager : MonoBehaviour
         }
 
         void OnPause(InputValue value){
-            if (value.isPressed && isPlaying){
-                Time.timeScale = 0f; // Pause the game
-                isPlaying = false;
-            } else {
-                Time.timeScale = 1f; // UnPause the game
-                isPlaying = true;
-            }
+            if (value.isPressed) PauseGame();
         }
     #endregion
 }
