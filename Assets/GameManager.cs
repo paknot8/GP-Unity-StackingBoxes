@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 {
     #region Variables and References
         // For the placeholders in the inspector
+        [SerializeField] private Transform[] blockPrefabs; // Array of prefabs to spawn
         [SerializeField] private Transform blockPrefab;
         [SerializeField] private Transform blockHolder;
         [HideInInspector] private Transform currentBlock = null;
@@ -71,11 +72,23 @@ public class GameManager : MonoBehaviour
 
     #region Spawning
     private void SpawnNewBlock(){
-            // Create a block with te desired properties.
-            currentBlock = Instantiate(blockPrefab, blockHolder);
+            // // Create a block with te desired properties.
+            // currentBlock = Instantiate(blockPrefab, blockHolder);
+            // currentBlock.position = blockStartPosition;
+            // currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            // currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
+
+            // Randomly select a prefab from the blockPrefabs array
+            int randomIndex = Random.Range(0, blockPrefabs.Length);
+            Transform selectedPrefab = blockPrefabs[randomIndex];
+
+            // Create a block with the selected prefab
+            currentBlock = Instantiate(selectedPrefab, blockHolder);
             currentBlock.position = blockStartPosition;
             currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-            currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
+
+            // Set currentRigidbody for the new block
+            currentRigidbody = currentBlock.GetComponent<Rigidbody2D>();
         }
 
         private IEnumerator DelayedSpawn(){

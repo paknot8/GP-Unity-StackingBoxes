@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 2666640098366416904}
   - component: {fileID: 1300361213851419843}
   m_Layer: 0
-  m_Name: Block
-  m_TagString: Stackable
+  m_Name: Square
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
