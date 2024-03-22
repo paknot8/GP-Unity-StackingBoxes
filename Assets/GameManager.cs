@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private Vector2 BlockStartPosition = new(0f,2f);
 
     public Vector2 vector;
-    public Vector3 movement;
+    public Vector2 movement;
 
     [SerializeField] private float blockSpeed = 1f;
     [SerializeField] private float blockSpeedIncrement = 0.5f;
@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenRounds = 1f;
 
     // Varaibles to handle the game state.
-    private int startingLives = 3;
+    private readonly int startingLives = 3;
     private int livesRemaining;
-    private bool playing = true;
+    private bool isPlaying = true;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +38,24 @@ public class GameManager : MonoBehaviour
         livesRemaining = startingLives;
         LivesText.text = $"{livesRemaining}"; // to update the Textmesh pro text
         SpawnNewBlock();
+
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        BlockMovement();
     }
 
     private void SpawnNewBlock(){
         // Create a block with te desired properties.
         currentBlock = Instantiate(blockPrefab, blockHolder);
         currentBlock.position = BlockStartPosition;
+
         currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-        currentRigidbody = currentBlock.GetComponent<Rigidbody2D>();
+        currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
+
         // Increase the block speed each time to make it harder
         //blockSpeed += blockSpeedIncrement;
     }
@@ -55,61 +65,11 @@ public class GameManager : MonoBehaviour
         SpawnNewBlock();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Movement();
-        //RestartGame(); 
-    }
-
-    private void Movement()
-    {
-        movement = new(vector.x,0,vector.y);
-        transform.Translate(blockSpeed * Time.deltaTime * movement);
-        
-        //BlockMovement();
-    }
-
     private void BlockMovement()
     {
-        if (currentBlock)
-        {
-            float moveAmount = Time.deltaTime * blockSpeed * blockDirection;
-            //currentBlock.position += new Vector3(moveAmount, 0, 0);
-
-            // if we've gone as far as we want, reverse direction.
-            if (Mathf.Abs(currentBlock.position.x) > xLimit)
-            {
-                // Set to the limit so it doesn't go further.
-                currentBlock.position = new Vector3(blockDirection * xLimit, currentBlock.position.y, 0);
-                blockDirection = -blockDirection;
-            }
-        }
-
-
-        // if (currentBlock)
-        // {
-        //     float moveAmount = Time.deltaTime * blockSpeed * blockDirection;
-        //     //currentBlock.position += new Vector3(moveAmount, 0, 0);
-
-        //     // if we've gone as far as we want, reverse direction.
-        //     if (Mathf.Abs(currentBlock.position.x) > xLimit)
-        //     {
-        //         // Set to the limit so it doesn't go further.
-        //         currentBlock.position = new Vector3(blockDirection * xLimit, currentBlock.position.y, 0);
-        //         blockDirection = -blockDirection;
-        //     }
-        // }
-    }
-
-
-
-    private void RestartGame()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        }
+        // Fixed the movement, add the currentBlock so the blocked spawned will be there
+        movement = new(vector.x,vector.y);
+        currentBlock.transform.Translate(blockSpeed * Time.deltaTime * movement); 
     }
 
     // Called from LoseLife whenever it detects a block has fallen off.
@@ -120,12 +80,13 @@ public class GameManager : MonoBehaviour
         LivesText.text = $"{livesRemaining}";
         // Check for end of game
         if (livesRemaining == 0){
-            playing = false;
+            isPlaying = false;
         }
     }
 
-    void OnMove(InputValue value){
-        vector = value.Get<Vector2>();
+    void OnMove(InputValue value) {
+        Debug.Log(vector = value.Get<Vector2>());
+        //BlockMovement(movement);
     }
 
     void OnDrop(InputValue value)
@@ -142,8 +103,6 @@ public class GameManager : MonoBehaviour
     }
 
     void OnQuit(InputValue value){
-        if(value.isPressed){
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        }
+        if(value.isPressed) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
