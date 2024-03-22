@@ -9,22 +9,16 @@ public class GameManager : MonoBehaviour
     // For the placeholders in the inspector
     [SerializeField] private Transform blockPrefab;
     [SerializeField] private Transform blockHolder;
-
-    [SerializeField] private TMPro.TextMeshProUGUI LivesText; // reference to TextMesh Pro
-
     private Transform currentBlock = null;
     private Rigidbody2D currentRigidbody;
 
-    private Vector2 BlockStartPosition = new(0f,2f);
+    [SerializeField] private TMPro.TextMeshProUGUI LivesText; // reference to TextMesh Pro
 
+    private Vector2 BlockStartPosition = new(0f,2f);
     private Vector2 vector;
     private Vector2 movement;
 
     [SerializeField] private float blockSpeed = 1f;
-    [SerializeField] private float blockSpeedIncrement = 0.5f;
-    [SerializeField] private float blockDirection = 1f;
-    [SerializeField] private float xLimit = 2f;
-
     [SerializeField] private float timeBetweenRounds = 2f;
 
     // Varaibles to handle the game state.
