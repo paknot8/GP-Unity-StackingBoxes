@@ -11,13 +11,13 @@ using UnityEngine.UIElements;
 - Important: dropping the boxes and their collision is Physics-based. (DONE)
 
 - The goal of the game is to stack the highest tower of boxes. 
-If a box is dropped on the floor and not on the table or another box, it is game over.
+If a box is dropped on the floor and not on the table or another box, it is game over. (DONE)
 
 - When the box lands, the player gets a new box (Again, like in Tetris) (DONE)
 
 - The boxes are of different shapes and colours (required to use PreFabs). 
 Shapes can be inspired by Tetris or you can mix it up by using triangles, 
-circles, capsules, etc. Only using square cubes isn't sufficient.
+circles, capsules, etc. Only using square cubes isn't sufficient. (DONE)
 
 - Before the player drops the box they can move it around left-right horizontally using either arrow keys or mouse position 
 (one of the options, both isn't required). (DONE)
