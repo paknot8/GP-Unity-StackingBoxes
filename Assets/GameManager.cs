@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
 
         void Update()
         {
-            BlockMovement();
+            if(currentBlock != null){
+                BlockMovement();
+            }
         }
     #endregion
 
