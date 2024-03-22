@@ -71,13 +71,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Spawning
-    private void SpawnNewBlock(){
-            // // Create a block with te desired properties.
-            // currentBlock = Instantiate(blockPrefab, blockHolder);
-            // currentBlock.position = blockStartPosition;
-            // currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-            // currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
-
+        private void SpawnNewBlock(){
             // Randomly select a prefab from the blockPrefabs array
             int randomIndex = Random.Range(0, blockPrefabs.Length);
             Transform selectedPrefab = blockPrefabs[randomIndex];
