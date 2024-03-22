@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     private Vector2 BlockStartPosition = new(0f,2f);
 
-    public Vector2 vector;
-    public Vector2 movement;
+    private Vector2 vector;
+    private Vector2 movement;
 
     [SerializeField] private float blockSpeed = 1f;
     [SerializeField] private float blockSpeedIncrement = 0.5f;
