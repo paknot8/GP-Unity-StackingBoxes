@@ -78,16 +78,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value) {
-        Debug.Log(vector = value.Get<Vector2>());
-        //BlockMovement(movement);
-    }
+    void OnMove(InputValue value) => Debug.Log(vector = value.Get<Vector2>());
 
     void OnDrop(InputValue value)
     {
         if (value.isPressed)
         {
-            // Stop it moving.
+            // Stop it from moving
             currentBlock = null;
             // Activate the RigidBody to enable gravity to drop it.
             currentRigidbody.simulated = true;
