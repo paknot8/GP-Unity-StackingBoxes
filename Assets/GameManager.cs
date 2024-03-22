@@ -34,20 +34,20 @@ public class GameManager : MonoBehaviour
 {
     #region Variables and References
         // For the placeholders in the inspector
-        [SerializeField] private Transform[] blockPrefabs; // Array of prefabs to spawn
-        [SerializeField] private Transform blockPrefab;
-        [SerializeField] private Transform blockHolder;
-        [HideInInspector] private Transform currentBlock = null;
+        [SerializeField] private Transform[] objectPrefabs; // Array of prefabs to spawn
+        [SerializeField] private Transform objectPrefab;
+        [SerializeField] private Transform objectHolder;
+        [HideInInspector] private Transform currentObject = null;
         [HideInInspector] private Rigidbody2D currentRigidbody;
 
         [SerializeField] private TMPro.TextMeshProUGUI LivesText; // reference to TextMesh Pro
 
         // Movement & Position Variables
-        private Vector2 blockStartPosition = new(0f,2f);
+        private Vector2 objectStartPosition = new(0f,2f);
         private Vector2 vector;
         private Vector2 movement;
         // Speed and Time
-        [SerializeField] private float blockSpeed = 1f;
+        [SerializeField] private float objectMoveSpeed = 3f;
         [SerializeField] private float timeBetweenRounds = 2f;
 
         // Variables to handle the game state.
@@ -71,18 +71,19 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Spawning
-        private void SpawnNewObject(){
-            // Randomly select a prefab from the blockPrefabs array
-            int randomIndex = Random.Range(0, blockPrefabs.Length);
-            Transform selectedPrefab = blockPrefabs[randomIndex];
+        private void SpawnNewObject()
+        {
+            // Randomly select a prefab from the ObjectPrefabs array
+            int randomIndex = Random.Range(0, objectPrefabs.Length);
+            Transform selectedPrefab = objectPrefabs[randomIndex];
 
-            // Create a block with the selected prefab
-            currentBlock = Instantiate(selectedPrefab, blockHolder);
-            currentBlock.position = blockStartPosition;
-            currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            // Create a Object with the selected prefab
+            currentObject = Instantiate(selectedPrefab, objectHolder);
+            currentObject.position = objectStartPosition;
+            currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
 
-            // Set currentRigidbody for the new block
-            currentRigidbody = currentBlock.GetComponent<Rigidbody2D>();
+            // Set currentRigidbody for the new Object
+            currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
         }
 
         private IEnumerator DelaySpawnNewObject()
@@ -93,28 +94,28 @@ public class GameManager : MonoBehaviour
 
         private void StopAndSpawnNext()
         {   
-            currentBlock = null;                // Stop it from moving
-            currentRigidbody.simulated = true;  // Activate the RigidBody to enable gravity to drop it.
-            StartCoroutine(DelaySpawnNewObject());     // Spawn the next block.
+            currentObject = null; // Stop it from moving
+            currentRigidbody.simulated = true; // Activate the RigidBody to enable gravity to drop it.
+            StartCoroutine(DelaySpawnNewObject()); // Spawn the next Object.
         }
     #endregion
 
     #region Movement
-        private void BlockMovement()
+        private void ObjectMovement()
         {
-            // Fixed the movement, add the currentBlock so the blocked spawned will be there
+            // Fixed the movement, add the currentObject so the objected spawned will be there and control that specific object
             movement = new(vector.x,vector.y);
-            currentBlock.transform.Translate(blockSpeed * Time.deltaTime * movement); 
+            currentObject.transform.Translate(objectMoveSpeed * Time.deltaTime * movement); 
         }
 
-        // Check if the currenBlock is empty in the Placeholder
+        // Check if the currentObject is empty in the Placeholder
         private void CheckPlaceHolderIsEmpty(){
-            if (currentBlock != null) BlockMovement();
+            if (currentObject != null) ObjectMovement();
         }
     #endregion
 
     #region Stats & Score
-        public void SubstractLifePoint() // Called from LoseLife whenever it detects a block has fallen off.
+        public void SubstractLifePoint() // Called from LoseLife whenever it detects a Object has fallen off.
         {
             // Update the lives remainnig UI element
             livesRemaining = Mathf.Max(livesRemaining -1, 0);
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
         }
 
         void OnDrop(InputValue value){
-            if (value.isPressed && currentBlock != null) StopAndSpawnNext();
+            if (value.isPressed && currentObject != null) StopAndSpawnNext();
         }
 
         void OnQuit(InputValue value){

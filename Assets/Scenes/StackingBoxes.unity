@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 701909061}
   - component: {fileID: 701909060}
   m_Layer: 5
-  m_Name: NumLives
+  m_Name: NumberOfLives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,14 +626,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567b44f7f1732ef47b90a2e3109d38e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefabs:
+  objectPrefabs:
   - {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
-  - {fileID: 7322017932898097322, guid: 5ef036bc82967f348b380e7b82c55ef1, type: 3}
   - {fileID: 7322017932898097322, guid: a19d7f162ac8f5d4eb2de8ee8ab82968, type: 3}
-  blockPrefab: {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
-  blockHolder: {fileID: 1231895370}
+  - {fileID: 7322017932898097322, guid: 5ef036bc82967f348b380e7b82c55ef1, type: 3}
+  objectPrefab: {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
+  objectHolder: {fileID: 1231895370}
   LivesText: {fileID: 701909060}
-  blockSpeed: 3
+  objectMoveSpeed: 3
   timeBetweenRounds: 1
 --- !u!4 &1115472743
 Transform:
@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 1231895370}
   - component: {fileID: 1231895371}
   m_Layer: 0
-  m_Name: BlockHolder
+  m_Name: ObjectHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
