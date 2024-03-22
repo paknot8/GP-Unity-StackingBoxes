@@ -58,24 +58,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         Movement();
-
-        // for restart game
-        RestartGame();
+        //RestartGame(); 
     }
 
     private void Movement()
     {
-        // Calculate movement direction
-        //Vector2 moveDirection = new Vector2(movementInput.x, 0f);
-        // Calculate movement direction
-        movement = new(vector.x,0);
-
-        // Move the object
+        movement = new(vector.x,0,vector.y);
         transform.Translate(blockSpeed * Time.deltaTime * movement);
         
-
         //BlockMovement();
     }
 
@@ -147,6 +138,12 @@ public class GameManager : MonoBehaviour
             currentRigidbody.simulated = true;
             // Spawn the next block.
             StartCoroutine(DelayedSpawn());
+        }
+    }
+
+    void OnQuit(InputValue value){
+        if(value.isPressed){
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
 }
