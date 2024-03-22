@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 /* --- Requirements ---
 - The game can be in 3D or 2D, you get to pick. (DONE)
@@ -153,7 +152,7 @@ public class GameManager : MonoBehaviour
         }
 
         void OnQuit(InputValue value){
-            if(value.isPressed) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            if(value.isPressed) SceneManager.LoadScene(0);
         }
 
         void OnPause(InputValue value){
