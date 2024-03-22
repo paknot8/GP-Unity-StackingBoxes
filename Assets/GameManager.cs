@@ -4,6 +4,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+/* --- Requirements ---
+The game can be in 3D or 2D, you get to pick.
+It consists of 1 scene. This scene has a 'floor' and a higher platform, like a 'table'.
+Like in Tetris, the player gets a random box that they can drop unto the table from a certain height.
+Important: dropping the boxes and their collision is Physics-based.
+The goal of the game is to stack the highest tower of boxes. If a box is dropped on the floor and not on the table or another box, it is game over.
+When the box lands, the player gets a new box (Again, like in Tetris)
+The boxes are of different shapes and colours (required to use PreFabs). Shapes can be inspired by Tetris or you can mix it up by using triangles, circles, capsules, etc. Only using square cubes isn't sufficient.
+Before the player drops the box they can move it around left-right horizontally using either arrow keys or mouse position (one of the options, both isn't required).
+If the tower of boxes gets higher and higher, make sure your camera responds by moving up or zooming out.
+
+Tips:
+
+For inspiration and clarification, play this browser version of the game (head's up: this is more than what is required for this achievement)
+https://couchpotatoes.itch.io/afwas
+
+
+*/
+
 public class GameManager : MonoBehaviour
 {
     // For the placeholders in the inspector
@@ -78,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     void OnDrop(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && currentBlock != null)
         {
             // Stop it from moving
             currentBlock = null;
