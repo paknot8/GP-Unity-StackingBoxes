@@ -64,14 +64,12 @@ public class GameManager : MonoBehaviour
 
         void Update()
         {
-            if(currentBlock != null){
-                BlockMovement();
-            }
+            CheckPlaceHolderIsEmpty();
         }
     #endregion
 
     #region Spawning
-        private void SpawnNewBlock(){
+    private void SpawnNewBlock(){
             // Create a block with te desired properties.
             currentBlock = Instantiate(blockPrefab, blockHolder);
             currentBlock.position = BlockStartPosition;
@@ -98,6 +96,11 @@ public class GameManager : MonoBehaviour
             // Fixed the movement, add the currentBlock so the blocked spawned will be there
             movement = new(vector.x,vector.y);
             currentBlock.transform.Translate(blockSpeed * Time.deltaTime * movement); 
+        }
+
+        // Check if the currenBlock is empty in the Placeholder
+        private void CheckPlaceHolderIsEmpty(){
+            if (currentBlock != null) BlockMovement();
         }
     #endregion
 
