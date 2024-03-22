@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         {
             ResetLives();
             UpdateLivesText();
-            SpawnNewBlock();
+            SpawnNewObject();
         }
 
         void Update()
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Spawning
-        private void SpawnNewBlock(){
+        private void SpawnNewObject(){
             // Randomly select a prefab from the blockPrefabs array
             int randomIndex = Random.Range(0, blockPrefabs.Length);
             Transform selectedPrefab = blockPrefabs[randomIndex];
@@ -85,16 +85,17 @@ public class GameManager : MonoBehaviour
             currentRigidbody = currentBlock.GetComponent<Rigidbody2D>();
         }
 
-        private IEnumerator DelayedSpawn(){
+        private IEnumerator DelaySpawnNewObject()
+        {
             yield return new WaitForSeconds(timeBetweenRounds);
-            SpawnNewBlock();
+            SpawnNewObject();
         }
 
         private void StopAndSpawnNext()
         {   
             currentBlock = null;                // Stop it from moving
             currentRigidbody.simulated = true;  // Activate the RigidBody to enable gravity to drop it.
-            StartCoroutine(DelayedSpawn());     // Spawn the next block.
+            StartCoroutine(DelaySpawnNewObject());     // Spawn the next block.
         }
     #endregion
 
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Stats & Score
-        public void RemoveLife() // Called from LoseLife whenever it detects a block has fallen off.
+        public void SubstractLifePoint() // Called from LoseLife whenever it detects a block has fallen off.
         {
             // Update the lives remainnig UI element
             livesRemaining = Mathf.Max(livesRemaining -1, 0);
