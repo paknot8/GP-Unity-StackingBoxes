@@ -36,22 +36,23 @@ public class GameManager : MonoBehaviour
         // For the placeholders in the inspector
         [SerializeField] private Transform blockPrefab;
         [SerializeField] private Transform blockHolder;
-        private Transform currentBlock = null;
-        private Rigidbody2D currentRigidbody;
+        [HideInInspector] private Transform currentBlock = null;
+        [HideInInspector] private Rigidbody2D currentRigidbody;
 
         [SerializeField] private TMPro.TextMeshProUGUI LivesText; // reference to TextMesh Pro
 
-        private Vector2 BlockStartPosition = new(0f,2f);
+        // Movement & Position Variables
+        private Vector2 blockStartPosition = new(0f,2f);
         private Vector2 vector;
         private Vector2 movement;
-
+        // Speed and Time
         [SerializeField] private float blockSpeed = 1f;
         [SerializeField] private float timeBetweenRounds = 2f;
 
         // Variables to handle the game state.
         private readonly int startingLives = 3;
         private int livesRemaining;
-        // private bool isPlaying = true;
+        private bool isPlaying = true;
     #endregion
 
     #region Start & Update
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
     private void SpawnNewBlock(){
             // Create a block with te desired properties.
             currentBlock = Instantiate(blockPrefab, blockHolder);
-            currentBlock.position = BlockStartPosition;
+            currentBlock.position = blockStartPosition;
             currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
             currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
         }
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
         }
     #endregion
 
-    #region Stats
+    #region Stats & Score
         public void RemoveLife() // Called from LoseLife whenever it detects a block has fallen off.
         {
             // Update the lives remainnig UI element
@@ -121,6 +122,16 @@ public class GameManager : MonoBehaviour
         void UpdateLivesText() => LivesText.text = $"{livesRemaining}"; // to update the Textmesh pro text
     #endregion
 
+    #region Menu
+        void PauseGame(){
+            if(isPlaying){
+                Time.timeScale = 0f; // Pause the game
+            } else {
+                Time.timeScale = 1f; // UnPause the game
+            }
+        }
+    #endregion
+
     #region New Input System Input/Controls
         void OnMove(InputValue value) => Debug.Log(vector = value.Get<Vector2>());
 
@@ -130,6 +141,16 @@ public class GameManager : MonoBehaviour
 
         void OnQuit(InputValue value){
             if(value.isPressed) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+
+        void OnPause(InputValue value){
+            if (value.isPressed && isPlaying){
+                Time.timeScale = 0f; // Pause the game
+                isPlaying = false;
+            } else {
+                Time.timeScale = 1f; // UnPause the game
+                isPlaying = true;
+            }
         }
     #endregion
 }
