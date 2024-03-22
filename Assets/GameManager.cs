@@ -25,39 +25,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float blockDirection = 1f;
     [SerializeField] private float xLimit = 2f;
 
-    [SerializeField] private float timeBetweenRounds = 1f;
+    [SerializeField] private float timeBetweenRounds = 2f;
 
     // Varaibles to handle the game state.
     private readonly int startingLives = 3;
     private int livesRemaining;
-    private bool isPlaying = true;
+    // private bool isPlaying = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        livesRemaining = startingLives;
-        LivesText.text = $"{livesRemaining}"; // to update the Textmesh pro text
-        SpawnNewBlock();
+    #region Start & Update
+        void Start()
+        {
+            livesRemaining = startingLives;
+            LivesText.text = $"{livesRemaining}"; // to update the Textmesh pro text
+            SpawnNewBlock();
+        }
 
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        BlockMovement();
-    }
+        void Update()
+        {
+            BlockMovement();
+        }
+    #endregion
 
     private void SpawnNewBlock(){
         // Create a block with te desired properties.
         currentBlock = Instantiate(blockPrefab, blockHolder);
         currentBlock.position = BlockStartPosition;
-
         currentBlock.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         currentRigidbody = currentBlock.GetComponent<Rigidbody2D>(); // pass currentBlock to the rigidbody
-
-        // Increase the block speed each time to make it harder
-        //blockSpeed += blockSpeedIncrement;
     }
 
     private IEnumerator DelayedSpawn(){
@@ -80,7 +74,7 @@ public class GameManager : MonoBehaviour
         LivesText.text = $"{livesRemaining}";
         // Check for end of game
         if (livesRemaining == 0){
-            isPlaying = false;
+            //isPlaying = false;
         }
     }
 
