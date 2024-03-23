@@ -29,6 +29,8 @@ For inspiration and clarification, play this browser version of the game (head's
 https://couchpotatoes.itch.io/afwas
 */
 
+// TO WATCH Video Tutorial camera: https://www.youtube.com/watch?v=4QP0ZTPUaI4
+
 public class GameManager : MonoBehaviour
 {
     #region Variables and References
