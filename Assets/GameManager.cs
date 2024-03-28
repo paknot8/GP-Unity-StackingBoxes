@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         private Vector2 movement;
         // Speed and Time
         [SerializeField] private float objectMoveSpeed = 3f;
-        [SerializeField] private float timeBetweenRounds = 2f;
+        [SerializeField] private float timeBetweenRounds = 1f;
 
         // Variables to handle the game state.
         private readonly int startingLives = 3;
@@ -145,9 +145,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region New Input System Input/Controls
-        void OnMove(InputValue value){
-            Debug.Log(vector = value.Get<Vector2>());
-        }
+        void OnMove(InputValue value) => vector = value.Get<Vector2>();
 
         void OnDrop(InputValue value){
             if (value.isPressed && currentObject != null) StopAndSpawnNext();
