@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 1076085529}
   - component: {fileID: 1076085532}
   m_Layer: 3
-  m_Name: Square
+  m_Name: HeightLimiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,6 +930,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  rayCount: 10
 --- !u!212 &1076085530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -991,8 +992,8 @@ Transform:
   m_GameObject: {fileID: 1076085528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -146.57861, y: -203.55856, z: 2.1336594}
-  m_LocalScale: {x: 4.8574, y: 0.3076, z: 1}
+  m_LocalPosition: {x: -146.5783, y: -203.1006, z: 2.1336594}
+  m_LocalScale: {x: 6.100329, y: 0.11645379, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 329866554}
