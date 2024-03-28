@@ -1,33 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MaxHeightLine : MonoBehaviour
 {
+    public float distance = 2f;
+    public LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
+    RaycastHit2D hit;
+
     // Update is called once per frame
     void Update()
     {
-        // Origin point of the raycast (current object's position)
-        Vector3 origin = transform.position;
+        // Cast a ray downwards in local space
+        Vector2 direction = -transform.up; // Using transform.up to cast downwards in local space
+        hit = Physics2D.Raycast(transform.position, direction, distance, ~layerMask); // Use ~ to invert the layer mask
 
-        // Direction of the raycast (downward direction)
-        Vector3 direction = Vector3.down;
-
-        // Length of the raycast (5 units)
-        float distance = 5f;
-
-        // Perform the raycast
-        RaycastHit hit;
-        if (Physics.Raycast(origin, direction, out hit, distance))
+        if (hit.collider != null)
         {
-            // Draw a line from the object's position to the hit point
-            Debug.DrawLine(origin, hit.point, Color.red);
+            Debug.Log("You Hit SOMETHING!");
+            Debug.DrawLine(transform.position, hit.point, Color.blue);
         }
         else
         {
-            // If no hit, draw a line indicating the full distance
-            Vector3 endPosition = origin + direction * distance;
-            Debug.DrawLine(origin, endPosition, Color.red);
+            // If no hit, draw the line to the maximum distance
+            Vector3 endPosition = transform.position + (Vector3)direction * distance;
+            Debug.DrawLine(transform.position, endPosition, Color.red);
+            Debug.Log("No Hit");
         }
     }
 }

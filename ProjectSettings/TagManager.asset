@@ -6,15 +6,14 @@ TagManager:
   tags:
   - Objects
   - GameOverLine
-  - Stackable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Level_Objects
   - Water
   - UI
-  - 
+  - Objects
   - 
   - 
   - 
