@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         [SerializeField] private int startingLives = 3;
         [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
 
-        private Vector2 objectStartPosition = new(0f, 2f);
+        public Vector2 objectStartPosition = new(0f, 2f);
         private Vector2 vector;
         private Vector2 movement;
         private int livesRemaining;
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // TODO - Add objectStartPosition + 2f up  so it will become from new(0f, 2f) to new(0f, 4f).
     void Start()
     {
         Debug.Log("Start Game -> GameManager.cs");
