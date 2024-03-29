@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         [SerializeField] private float objectMoveSpeed = 3f;
         [SerializeField] private float timeBetweenRounds = 1f;
         [SerializeField] private int startingLives = 3;
-        [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject = new();
+        [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
 
         private Vector2 objectStartPosition = new(0f, 2f);
         private Vector2 vector;
@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
         private Transform currentObject;
         private Rigidbody2D currentRigidbody;
     #endregion 
+
+    void Awake(){
+        maxHeightLineReferenceToObject = new(); 
+    }
 
     void Start()
     {
