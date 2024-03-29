@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class MaxHeightManager : MonoBehaviour
 {
-    #region Variables & References
-        // References
-        [SerializeField] private GameObject maxHeightLineObject;
-        [SerializeField] private LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
+    [SerializeField] private GameObject maxHeightLineObject;
+    [SerializeField] private LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
+    [SerializeField] private float rayDistance;
+    [SerializeField] private int rayCount; // Number of rays to cast
+    [HideInInspector] private RaycastHit2D[] hits; // Moved initialization to Start method
 
-        // Variables
-        public float distance = 1f;
-    
-        // Raycast
-        public int rayCount = 10; // Number of rays to cast
-        RaycastHit2D[] hits;
-    #endregion
+    void Awake(){
+        rayDistance = 1f;
+        rayCount = 50; // Initialize rayCount here
+        hits = new RaycastHit2D[rayCount]; // Initialize hits array here
+    }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         
     }
 
@@ -68,37 +66,35 @@ public class MaxHeightManager : MonoBehaviour
         if (!maxHeightLineObject.activeSelf) // Don't draw rays if the object is disabled
             return;
 
-        if(maxHeightLineObject != null && maxHeightLineObject){
+        if (maxHeightLineObject != null && maxHeightLineObject)
+        {
             // Calculate the width of the object using its BoxCollider2D
             float objectWidth = maxHeightLineObject.GetComponent<SpriteRenderer>().bounds.size.x;
-            
+
 
             // Calculate the spacing between each ray
             float raySpacing = objectWidth / (rayCount - 1);
 
             // Cast rays downwards
-            hits = new RaycastHit2D[rayCount];
             for (int i = 0; i < rayCount; i++)
             {
                 // Calculate the origin of each ray
                 Vector2 rayOrigin = new(maxHeightLineObject.transform.position.x - objectWidth / 2 + i * raySpacing, maxHeightLineObject.transform.position.y);
 
                 // Cast a ray downwards at the calculated origin
-                hits[i] = Physics2D.Raycast(rayOrigin, Vector2.down, distance, ~layerMask);
+                hits[i] = Physics2D.Raycast(rayOrigin, Vector2.down, rayDistance, ~layerMask);
 
                 // Draw debug lines
                 if (hits[i].collider != null)
                 {
-                    //Debug.Log("Ray " + i + " hit: " + hits[i].collider.gameObject.name);
                     Debug.DrawLine(rayOrigin, hits[i].point, Color.blue);
                 }
                 else
                 {
-                    Vector3 endPosition = rayOrigin + Vector2.down * distance;
+                    Vector3 endPosition = rayOrigin + Vector2.down * rayDistance;
                     Debug.DrawLine(rayOrigin, endPosition, Color.red);
-                    //Debug.Log("Ray " + i + " didn't hit anything");
                 }
             }
-        } 
+        }
     }
 }
