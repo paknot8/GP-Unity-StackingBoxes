@@ -1520,7 +1520,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rayDistance: 1
-  rayCount: 10
+  rayCount: 50
 --- !u!1 &1382017553
 GameObject:
   m_ObjectHideFlags: 0
