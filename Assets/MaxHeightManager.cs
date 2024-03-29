@@ -13,7 +13,6 @@ public class MaxHeightManager : MonoBehaviour
         // Raycast
         public int rayCount = 10; // Number of rays to cast
         RaycastHit2D[] hits;
-
     #endregion
 
     // Start is called before the first frame update

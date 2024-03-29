@@ -259,7 +259,6 @@ Transform:
   - {fileID: 1216038082}
   - {fileID: 697363309}
   - {fileID: 1112239872}
-  - {fileID: 1076085531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &376179476
@@ -428,6 +427,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1231895370}
+  - {fileID: 1076085531}
   m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
@@ -977,7 +977,7 @@ Transform:
   m_LocalScale: {x: 6.100329, y: 0.11645379, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 329866554}
+  m_Father: {fileID: 492181305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1076085532
 BoxCollider2D:
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   objectMoveSpeed: 3
   timeBetweenRounds: 2
   startingLives: 3
-  maxHeightLineObject: {fileID: 1076085528}
+  maxHeightLineReferenceToObject: {fileID: 1285067321}
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0

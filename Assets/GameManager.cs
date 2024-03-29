@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         [SerializeField] private float objectMoveSpeed = 3f;
         [SerializeField] private float timeBetweenRounds = 1f;
         [SerializeField] private int startingLives = 3;
-        [SerializeField] private GameObject maxHeightLineObject;
+        [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject = new();
 
         private Vector2 objectStartPosition = new(0f, 2f);
         private Vector2 vector;
@@ -47,14 +47,18 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DelaySpawnNewObject()
     {
+        maxHeightLineReferenceToObject.Disable();
         yield return new WaitForSeconds(timeBetweenRounds);
         SpawnNewObject();
+        maxHeightLineReferenceToObject.Enable();
+        
     }
 
     private void StopAndSpawnNext()
     {
         currentObject = null;
         currentRigidbody.simulated = true;
+
         StartCoroutine(DelaySpawnNewObject());
     }
 
