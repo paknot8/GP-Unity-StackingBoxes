@@ -5,21 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] objectPrefabs;
-    [SerializeField] private Transform objectHolder;
-    [SerializeField] private TMPro.TextMeshProUGUI LivesText;
-    [SerializeField] private float objectMoveSpeed = 3f;
-    [SerializeField] private float timeBetweenRounds = 1f;
-    [SerializeField] private int startingLives = 3;
-    [SerializeField] private GameObject maxHeightLine;
+    #region Variables & References
+        [SerializeField] private Transform[] objectPrefabs;
+        [SerializeField] private Transform objectHolder;
+        [SerializeField] private TMPro.TextMeshProUGUI LivesText;
+        [SerializeField] private float objectMoveSpeed = 3f;
+        [SerializeField] private float timeBetweenRounds = 1f;
+        [SerializeField] private int startingLives = 3;
+        [SerializeField] private GameObject maxHeightLineObject;
 
-    private Vector2 objectStartPosition = new(0f, 2f);
-    private Vector2 vector;
-    private Vector2 movement;
-    private int livesRemaining;
-    private bool isPlaying = true;
-    private Transform currentObject;
-    private Rigidbody2D currentRigidbody;
+        private Vector2 objectStartPosition = new(0f, 2f);
+        private Vector2 vector;
+        private Vector2 movement;
+        private int livesRemaining;
+        private bool isPlaying = true;
+        private Transform currentObject;
+        private Rigidbody2D currentRigidbody;
+    #endregion 
 
     void Start()
     {
@@ -94,20 +96,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value) => vector = value.Get<Vector2>();
+    #region New System Input
+        void OnMove(InputValue value) => vector = value.Get<Vector2>();
 
-    void OnDrop(InputValue value)
-    {
-        if (value.isPressed && currentObject != null) StopAndSpawnNext();
-    }
+        void OnDrop(InputValue value)
+        {
+            if (value.isPressed && currentObject != null) StopAndSpawnNext();
+        }
 
-    void OnQuit(InputValue value)
-    {
-        if (value.isPressed) SceneManager.LoadScene(0);
-    }
+        void OnQuit(InputValue value)
+        {
+            if (value.isPressed) SceneManager.LoadScene(0);
+        }
 
-    void OnPause(InputValue value)
-    {
-        if (value.isPressed) PauseGame();
-    }
+        void OnPause(InputValue value)
+        {
+            if (value.isPressed) PauseGame();
+        }
+    #endregion
 }

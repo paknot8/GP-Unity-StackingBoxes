@@ -1206,7 +1206,7 @@ MonoBehaviour:
   objectMoveSpeed: 3
   timeBetweenRounds: 2
   startingLives: 3
-  maxHeightLine: {fileID: 1076085528}
+  maxHeightLineObject: {fileID: 1076085528}
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,10 +1516,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeightLineObject: {fileID: 1076085528}
-  distance: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  distance: 1
   rayCount: 10
 --- !u!1 &1382017553
 GameObject:
