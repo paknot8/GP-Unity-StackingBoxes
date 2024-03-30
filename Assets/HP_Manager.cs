@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class LoseLife : MonoBehaviour
+public class Health : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 
-    private void OnTriggerEnter2D(Collider2D collision){
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         gameManager.SubstractLifePoint();
-    }    
+    }   
 }

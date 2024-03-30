@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         [SerializeField] private float objectMoveSpeed = 3f;
         [SerializeField] private float timeBetweenRounds = 1f;
         [SerializeField] private int startingLives = 3;
-        [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
+        [SerializeField] private MaxHeight_Manager maxHeightLineReferenceToObject;
 
         private Transform currentObject; // Current Spawned object
         private Rigidbody2D currentRigidbody; // Gravity of the object
