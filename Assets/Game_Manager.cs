@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class Game_Manager : MonoBehaviour
 {
     #region Variables & References
         [SerializeField] private Transform[] objectPrefabs;
