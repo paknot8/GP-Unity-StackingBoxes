@@ -14,13 +14,16 @@ public class GameManager : MonoBehaviour
         [SerializeField] private int startingLives = 3;
         [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
 
+        private Transform currentObject; // Current Spawned object
+        private Rigidbody2D currentRigidbody; // Gravity of the object
+
+        // Variables
         public Vector2 objectStartPosition = new(0f, 2f);
         private Vector2 vector;
         private Vector2 movement;
         private int livesRemaining;
         private bool isPlaying = true;
-        private Transform currentObject;
-        private Rigidbody2D currentRigidbody;
+        
     #endregion 
 
     void Awake(){
@@ -85,7 +88,8 @@ public class GameManager : MonoBehaviour
         LivesText.text = $"{livesRemaining}";
         if (livesRemaining == 0)
         {
-            // Game over logic
+            Debug.Log("You Lost!");
+            SceneManager.LoadScene(0);
         }
     }
 

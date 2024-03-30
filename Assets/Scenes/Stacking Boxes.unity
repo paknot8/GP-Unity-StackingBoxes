@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 376179479}
   - component: {fileID: 376179478}
   m_Layer: 5
-  m_Name: Tutorial
+  m_Name: Text_Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 742, y: -118}
+  m_AnchoredPosition: {x: 742, y: -97}
   m_SizeDelta: {x: 194.111, y: 73.470215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376179478
@@ -347,10 +347,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.5
+  m_fontSize: 18.1
   m_fontSizeBase: 18.1
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score
+  m_text: HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1208,6 +1208,7 @@ MonoBehaviour:
   timeBetweenRounds: 2
   startingLives: 3
   maxHeightLineReferenceToObject: {fileID: 1285067321}
+  objectStartPosition: {x: 0, y: 2}
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0
