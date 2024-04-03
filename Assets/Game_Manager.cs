@@ -46,16 +46,78 @@ public class Game_Manager : MonoBehaviour
         CheckPlaceHolderIsEmpty();
     }
 
+    // private void SpawnNewObject()
+    // {
+    //     int randomIndex = Random.Range(0, objectPrefabs.Length);
+    //     Transform selectedPrefab = objectPrefabs[randomIndex];
+    //     currentObject = Instantiate(selectedPrefab);
+    //     currentObject.position = objectStartPosition;
+    //     currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+    //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
+    // }
+
+    // private void SpawnNewObject()
+    // {
+    //     int randomIndex = Random.Range(0, objectPrefabs.Length);
+    //     Transform selectedPrefab = objectPrefabs[randomIndex];
+    //     currentObject = Instantiate(selectedPrefab);
+        
+    //     // Get the position of the main camera
+    //     Vector3 cameraPosition = Camera.main.transform.position;
+        
+    //     // Calculate the spawn position relative to the camera view
+    //     Vector2 spawnPosition = cameraPosition + Vector3.up * 2f;
+        
+    //     currentObject.position = spawnPosition;
+    //     currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+    //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
+    // }
+
     private void SpawnNewObject()
     {
         int randomIndex = Random.Range(0, objectPrefabs.Length);
         Transform selectedPrefab = objectPrefabs[randomIndex];
         currentObject = Instantiate(selectedPrefab);
-        currentObject.position = objectStartPosition;
+        
+        // Ensure that there is a main camera and it is active
+        if (Camera.main != null && Camera.main.gameObject.activeInHierarchy)
+        {
+            // Get the position of the main camera
+            Vector3 cameraPosition = Camera.main.transform.position;
+            
+            // Calculate the spawn position relative to the camera view
+            Vector2 spawnPosition = cameraPosition + Vector3.up * 2f;
+            
+            currentObject.position = spawnPosition;
+        }
+        else
+        {
+            // If there is no main camera or it is inactive, spawn the object at a default position
+            currentObject.position = objectStartPosition;
+        }
+        
         currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
+        
+        // Call the method continuously to update the spawn position
+        StartCoroutine(UpdateSpawnPosition());
     }
 
+    // Coroutine to continuously update the spawn position
+    private IEnumerator UpdateSpawnPosition()
+    {
+        while (true)
+        {
+            yield return null;
+            
+            // Get the position of the main camera
+            Vector3 cameraPosition = Camera.main.transform.position;
+            
+            // Update the spawn position relative to the camera view
+            Vector2 spawnPosition = cameraPosition + Vector3.up * 2f;
+            currentObject.position = spawnPosition;
+        }
+    }
 
     private IEnumerator DelaySpawnNewObject()
     {
