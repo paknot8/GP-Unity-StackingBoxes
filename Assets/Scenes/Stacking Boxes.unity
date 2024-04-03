@@ -1283,7 +1283,7 @@ MonoBehaviour:
   - {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
   objectHolder: {fileID: 1231895370}
   LivesText: {fileID: 701909060}
-  objectMoveSpeed: 3
+  objectMoveSpeed: 4
   timeBetweenRounds: 2
   startingLives: 3
   maxHeightLineReferenceToObject: {fileID: 1285067321}
