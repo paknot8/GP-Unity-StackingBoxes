@@ -10,7 +10,6 @@ public class Game_Manager : MonoBehaviour
         [SerializeField] private Transform objectHolder;
         [SerializeField] private TMPro.TextMeshProUGUI LivesText;
         [SerializeField] private float objectMoveSpeed = 4f;
-        [SerializeField] private float timeBetweenRounds = 1f;
         [SerializeField] private int startingLives = 3;
         [SerializeField] private MaxHeight_Manager maxHeightLineReferenceToObject;
 
@@ -51,28 +50,51 @@ public class Game_Manager : MonoBehaviour
     //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
     // }
 
+    // private void SpawnNewObject()
+    // {
+    //     int randomIndex = Random.Range(0, objectPrefabs.Length);
+    //     Transform selectedPrefab = objectPrefabs[randomIndex];
+    //     currentObject = Instantiate(selectedPrefab);
+        
+    //     // Get the position of the main camera
+    //     Vector3 cameraPosition = Camera.main.transform.position;
+        
+    //     // Calculate the spawn position relative to the camera view
+    //     Vector2 spawnPosition = cameraPosition + Vector3.up * 2f;
+        
+    //     currentObject.position = spawnPosition;
+    //     currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+    //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
+    // }
+
     private void SpawnNewObject()
     {
         int randomIndex = Random.Range(0, objectPrefabs.Length);
         Transform selectedPrefab = objectPrefabs[randomIndex];
         currentObject = Instantiate(selectedPrefab);
-        
-        // Get the position of the main camera
+
+        // Calculate the position of the objectHolder
         Vector3 cameraPosition = Camera.main.transform.position;
-        
-        // Calculate the spawn position relative to the camera view
-        Vector2 spawnPosition = cameraPosition + Vector3.up * 2f;
-        
+        float cameraHeight = Camera.main.orthographicSize;
+        Vector2 spawnPosition = new Vector2(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
+
         currentObject.position = spawnPosition;
         currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
     }
 
+
     private IEnumerator DelaySpawnNewObject()
     {
         maxHeightLineReferenceToObject.Disable();
-        yield return new WaitForSeconds(timeBetweenRounds);
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(DelayHeightLimiter());
         SpawnNewObject();
+    }
+
+    private IEnumerator DelayHeightLimiter()
+    {
+        yield return new WaitForSeconds(2f);
         maxHeightLineReferenceToObject.Enable();
     }
 
