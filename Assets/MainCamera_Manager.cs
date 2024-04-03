@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MoveUpOnKeyPress : MonoBehaviour
@@ -12,7 +13,7 @@ public class MoveUpOnKeyPress : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator MoveObjectUpSmoothly()
+    IEnumerator MoveObjectUpSmoothly()
     {
         Vector3 targetPosition = transform.position + Vector3.up * 2f;
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)

@@ -44,15 +44,26 @@ public class Game_Manager : MonoBehaviour
         CheckPlaceHolderIsEmpty();
     }
 
+    // private void SpawnNewObject()
+    // {
+    //     int randomIndex = Random.Range(0, objectPrefabs.Length);
+    //     Transform selectedPrefab = objectPrefabs[randomIndex];
+    //     currentObject = Instantiate(selectedPrefab, objectHolder);
+    //     currentObject.position = objectStartPosition;
+    //     currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+    //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
+    // }
+
     private void SpawnNewObject()
     {
         int randomIndex = Random.Range(0, objectPrefabs.Length);
         Transform selectedPrefab = objectPrefabs[randomIndex];
-        currentObject = Instantiate(selectedPrefab, objectHolder);
+        currentObject = Instantiate(selectedPrefab);
         currentObject.position = objectStartPosition;
         currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
     }
+
 
     private IEnumerator DelaySpawnNewObject()
     {
