@@ -26,13 +26,8 @@ public class Game_Manager : MonoBehaviour
 
         private MainCamera_Manager mainCameraManager;
         
-    #endregion 
+    #endregion
 
-    void Awake(){
-        
-    }
-
-    // TODO - Add objectStartPosition + 2f up  so it will become from new(0f, 2f) to new(0f, 4f).
     void Start()
     {
         Debug.Log("Start Game -> GameManager.cs");
