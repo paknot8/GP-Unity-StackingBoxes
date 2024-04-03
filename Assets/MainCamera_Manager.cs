@@ -7,6 +7,11 @@ public class MoveUpOnKeyPress : MonoBehaviour
 
     void Update()
     {
+        UpButton();
+    }
+
+    private void UpButton()
+    {
         if (Input.GetKeyDown(KeyCode.O)) // Check for 'O' key press
         {
             StartCoroutine(MoveObjectUpSmoothly());
