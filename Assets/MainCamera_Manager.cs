@@ -25,7 +25,7 @@ public class MainCamera_Manager : MonoBehaviour
     {
         isMoving = true; // Set the flag to indicate the camera is moving
         
-        Vector3 targetPosition = transform.position + Vector3.up * 1f;
+        Vector3 targetPosition = transform.position + Vector3.up * 2f;
         // Move the camera to the target position
         while (transform.position.y < targetPosition.y)
         {
