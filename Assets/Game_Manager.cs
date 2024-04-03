@@ -76,7 +76,7 @@ public class Game_Manager : MonoBehaviour
         // Calculate the position of the objectHolder
         Vector3 cameraPosition = Camera.main.transform.position;
         float cameraHeight = Camera.main.orthographicSize;
-        Vector2 spawnPosition = new Vector2(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
+        Vector2 spawnPosition = new(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
 
         currentObject.position = spawnPosition;
         currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
