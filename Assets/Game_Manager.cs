@@ -65,10 +65,22 @@ public class Game_Manager : MonoBehaviour
 
     private void StopAndSpawnNext()
     {
+        // currentObject = null;
+        // currentRigidbody.simulated = true;
+
+        // StartCoroutine(DelaySpawnNewObject());
+
         currentObject = null;
         currentRigidbody.simulated = true;
 
         StartCoroutine(DelaySpawnNewObject());
+        
+        // Move the current spawned object to the object container
+        if (currentObject != null && objectHolder.parent != null)
+        {
+            currentObject.SetParent(objectHolder.parent); // Assuming objectHolder has a parent
+            currentObject.position = objectStartPosition;
+        }
     }
 
     private void ObjectMovement()
