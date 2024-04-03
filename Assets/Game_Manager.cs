@@ -23,6 +23,8 @@ public class Game_Manager : MonoBehaviour
         private Vector2 movement;
         private int livesRemaining;
         private bool isPlaying = true;
+
+        private MainCamera_Manager mainCameraManager;
         
     #endregion 
 
@@ -43,16 +45,6 @@ public class Game_Manager : MonoBehaviour
     {
         CheckPlaceHolderIsEmpty();
     }
-
-    // private void SpawnNewObject()
-    // {
-    //     int randomIndex = Random.Range(0, objectPrefabs.Length);
-    //     Transform selectedPrefab = objectPrefabs[randomIndex];
-    //     currentObject = Instantiate(selectedPrefab, objectHolder);
-    //     currentObject.position = objectStartPosition;
-    //     currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-    //     currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
-    // }
 
     private void SpawnNewObject()
     {

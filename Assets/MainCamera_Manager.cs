@@ -22,7 +22,7 @@ public class MainCamera_Manager : MonoBehaviour
 
     IEnumerator MoveObjectUpSmoothly()
     {
-        Vector3 targetPosition = transform.position + Vector3.up * 2f;
+        Vector3 targetPosition = transform.position + Vector3.up * 3f;
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);

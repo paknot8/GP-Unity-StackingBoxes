@@ -4,12 +4,11 @@ public class MaxHeight_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject maxHeightLineObject;
     [SerializeField] private LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
-    [SerializeField] private float rayDistance = 1f;
+    [SerializeField] private float rayDistance = 2f;
     [SerializeField] private int rayCount = 50; // Number of rays to cast
     [SerializeField] private RaycastHit2D[] hits; // Moved initialization to Start method
 
     private MainCamera_Manager mainCameraManager;
-    private Game_Manager objectHolder;
 
     void Awake()
     {
@@ -75,10 +74,12 @@ public class MaxHeight_Manager : MonoBehaviour
                 if (hits[i].collider != null)
                 {
                     Debug.DrawLine(rayOrigin, hits[i].point, Color.blue);
+                    Disable();
                     if (mainCameraManager != null)
                     {
                         mainCameraManager.GoUp(); // Call GoUp method in MainCamera_Manager.cs
                     }
+                    Enable();
                 }
                 else
                 {
