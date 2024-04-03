@@ -8,14 +8,18 @@ public class MaxHeight_Manager : MonoBehaviour
     [SerializeField] private int rayCount = 50; // Number of rays to cast
     [SerializeField] private RaycastHit2D[] hits; // Moved initialization to Start method
 
+    private MainCamera_Manager mainCameraManager;
+    private Game_Manager objectHolder;
+
     void Awake()
     {
         hits = new RaycastHit2D[rayCount]; // Initialize hits array here
+        mainCameraManager = Camera.main.GetComponent<MainCamera_Manager>();
     }
 
     // Start is called before the first frame update
     void Start(){
-        
+
     }
 
     public void Enable()
@@ -41,23 +45,7 @@ public class MaxHeight_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleToggleMaxHeightLine();
         DrawRayDownwards();
-    }
-
-    private void HandleToggleMaxHeightLine()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (!maxHeightLineObject.activeSelf)
-            {
-                Enable();
-            }
-            else
-            {
-                Disable();
-            }
-        }
     }
 
     private void DrawRayDownwards()
@@ -87,6 +75,10 @@ public class MaxHeight_Manager : MonoBehaviour
                 if (hits[i].collider != null)
                 {
                     Debug.DrawLine(rayOrigin, hits[i].point, Color.blue);
+                    if (mainCameraManager != null)
+                    {
+                        mainCameraManager.GoUp(); // Call GoUp method in MainCamera_Manager.cs
+                    }
                 }
                 else
                 {

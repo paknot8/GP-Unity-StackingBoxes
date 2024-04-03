@@ -1,21 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class MoveUpOnKeyPress : MonoBehaviour
+public class MainCamera_Manager : MonoBehaviour
 {
     public float moveSpeed = 2f; // Speed of movement
 
     void Update()
     {
-        UpButton();
+        // GoUp();
     }
 
-    private void UpButton()
+    public void GoUp()
     {
-        if (Input.GetKeyDown(KeyCode.O)) // Check for 'O' key press
-        {
-            StartCoroutine(MoveObjectUpSmoothly());
-        }
+        // if (Input.GetKeyDown(KeyCode.O)) // Check for 'O' key press
+        // {
+        //     StartCoroutine(MoveObjectUpSmoothly());
+        // }
+
+        StartCoroutine(MoveObjectUpSmoothly());
     }
 
     IEnumerator MoveObjectUpSmoothly()
