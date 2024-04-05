@@ -5,7 +5,7 @@ public class MaxHeightManager : MonoBehaviour
     [SerializeField] private GameObject maxHeightLineObject;
     [SerializeField] private LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
     [SerializeField] private float rayDistance = 1f;
-    [SerializeField] private int rayCount = 50; // Number of rays to cast
+    [SerializeField] private int rayCount = 25; // Number of rays to cast
     [SerializeField] private RaycastHit2D[] hits; // Moved initialization to Start method
 
     private MainCameraManager mainCameraManager;
