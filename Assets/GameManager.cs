@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] objectPrefabs;
     [SerializeField] private Transform objectHolder;
     [SerializeField] private TMPro.TextMeshProUGUI livesText;
-    [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
+    [SerializeField] private MaxHeightManager maxHeightLine;
 
     [Header("Public Variables")]
     public float objectMoveSpeed;
@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
     // Coroutine for delayed object spawning
     private IEnumerator DelaySpawnNewObject()
     {
-        maxHeightLineReferenceToObject.Disable();
+        maxHeightLine.Disable();
         yield return new WaitForSeconds(1f);
-        maxHeightLineReferenceToObject.Enable();
+        maxHeightLine.Enable();
         yield return new WaitForSeconds(2f);
         SpawnNewObject();
     }
@@ -76,10 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Moves the current object according to input
-    private void ObjectMovement()
-    {
-        currentObject.transform.Translate(objectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
-    }
+    private void ObjectMovement() => currentObject.transform.Translate(objectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
 
     // Checks if the placeholder for the object is empty and moves it if necessary
     private void CheckPlaceholderIsEmpty()
