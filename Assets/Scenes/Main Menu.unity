@@ -264,6 +264,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2411599130910065832, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411599130910065832, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e06380af05bf74144ac9e2e4d3a1accc, type: 3}
     - target: {fileID: 7679038717676262818, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
       propertyPath: m_Name
       value: Background Music

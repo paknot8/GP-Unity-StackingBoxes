@@ -4,10 +4,11 @@ public class GuideLineScript : MonoBehaviour
 {
     // Reference to the Renderer component
     [HideInInspector] private Renderer guideLines;
-    [SerializeField] private float transparancy = 0.3f;
+    private float transparancy;
 
     void Awake(){
         guideLines = GetComponent<Renderer>();
+         transparancy = 0.2f;
     }
 
     // Start is called before the first frame update

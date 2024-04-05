@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: edb3ef088ecef8542876033ad3083237, type: 3}
-  m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -455,7 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd198371ab1b337439314bc914653558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparancy: 0.3
 --- !u!1 &376179476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,7 +1556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd198371ab1b337439314bc914653558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparancy: 0.3
 --- !u!1 &1216038081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2070,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 792663004}
     m_Modifications:
+    - target: {fileID: 2411599130910065832, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411599130910065832, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36a4fcc6a831e1840931f3a88ebb8f69, type: 3}
     - target: {fileID: 7679038717676262818, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
       propertyPath: m_Name
       value: Background Music
