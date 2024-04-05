@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GuideLineScript : MonoBehaviour
+{
+    // Reference to the Renderer component
+    [HideInInspector] private Renderer guideLines;
+
+    void Awake(){
+        guideLines = GetComponent<Renderer>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Check if a Renderer component exists
+        if (guideLines != null)
+        {
+            // Get the material of the object
+            Material material = guideLines.material;
+
+            // Get the current color of the material
+            Color color = material.color;
+
+            // Set the alpha value to desired transparency (0 for fully transparent, 1 for fully opaque)
+            color.a = 0.5f;
+
+            // Set the modified color back to the material
+            material.color = color;
+        }
+        else
+        {
+            Debug.LogWarning("Renderer component not found on this object.");
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
