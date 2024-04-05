@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+// GameManager class responsible for managing the game flow and objects.
 public class GameManager : MonoBehaviour
 {
     // Serialized fields for easy tweaking in the Unity Editor
@@ -23,6 +24,19 @@ public class GameManager : MonoBehaviour
     private bool isPlaying = true;
     private Vector2 vector;
 
+    // restricted colors
+    [HideInInspector] private readonly Color[] restrictedColors =
+    {
+        new Color(0.1f, 0.5f, 0.1f),  // Dark green
+        new Color(0.4f, 0.1f, 0.4f),  // Dark purple
+        new Color(0.1f, 0.1f, 0.5f),  // Dark blue
+        new Color(0f, 0f, 0f),        // Black
+        new Color(0.5f, 0.1f, 0.1f),  // Dark red
+        new Color(0.3f, 0.3f, 0f),    // Dark yellow
+        new Color(0.1f, 0.4f, 0.4f),  // Dark cyan
+    };
+
+    // Awake is called when the script instance is being loaded
     void Awake(){
         objectMoveSpeed = 4f;
         startingLives = 3;
@@ -36,29 +50,31 @@ public class GameManager : MonoBehaviour
         SpawnNewObject();
     }
 
-    void Update()
-    {
-        CheckPlaceholderIsEmpty();
-    }
+    // Update is called once per frame
+    void Update() => CheckPlaceholderIsEmpty();
 
     // Spawns a new object with random properties
     private void SpawnNewObject()
     {
         int randomIndex = Random.Range(0, objectPrefabs.Length);
         Transform selectedPrefab = objectPrefabs[randomIndex];
-        
-        // Calculate spawn position based on camera position and height
+
+        // Select a random color from the restricted colors array
+        Color selectedColor = restrictedColors[Random.Range(0, restrictedColors.Length)];
+
+        // Spawn position based on camera position and height
         Vector3 cameraPosition = Camera.main.transform.position;
         float cameraHeight = Camera.main.orthographicSize;
-        Vector2 spawnPosition = new(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
+        Vector2 spawnPosition = new Vector2(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
 
+        // Instantiate the object and set its color
         currentObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-        currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+        currentObject.GetComponent<SpriteRenderer>().color = selectedColor;
         currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
     }
 
-    // Coroutine for delayed object spawning
-    private IEnumerator DelaySpawnNewObject()
+    // Coroutine for delayed object spawning and object enabler
+    private IEnumerator DelaySpawn()
     {
         maxHeightLine.Disable();
         yield return new WaitForSeconds(1f);
@@ -72,17 +88,14 @@ public class GameManager : MonoBehaviour
     {
         currentObject = null;
         currentRigidbody.simulated = true;
-        StartCoroutine(DelaySpawnNewObject());
+        StartCoroutine(DelaySpawn());
     }
 
     // Moves the current object according to input
     private void ObjectMovement() => currentObject.transform.Translate(objectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
 
     // Checks if the placeholder for the object is empty and moves it if necessary
-    private void CheckPlaceholderIsEmpty()
-    {
-        if (currentObject != null) ObjectMovement();
-    }
+    private void CheckPlaceholderIsEmpty() { if (currentObject != null) ObjectMovement(); }
 
     // Subtracts one life point and updates UI
     public void SubtractLifePoint()
@@ -98,11 +111,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Resets life count to starting value
-    private void ResetLives() => livesRemaining = startingLives;
-
-    // Updates lives text in UI
-    private void UpdateLivesText() => livesText.text = $"{livesRemaining}";
+    private void ResetLives() => livesRemaining = startingLives; // Resets life count to starting value
+    private void UpdateLivesText() => livesText.text = $"{livesRemaining}"; // Updates lives text in UI
 
     // Pauses the game
     private void PauseGame()
@@ -113,20 +123,8 @@ public class GameManager : MonoBehaviour
 
     #region New System Input
         void OnMove(InputValue value) => vector = value.Get<Vector2>();
-
-        void OnDrop(InputValue value)
-        {
-            if (value.isPressed && currentObject != null) StopAndSpawnNext();
-        }
-
-        void OnQuit(InputValue value)
-        {
-            if (value.isPressed) SceneManager.LoadScene(0);
-        }
-
-        void OnPause(InputValue value)
-        {
-            if (value.isPressed) PauseGame();
-        }
+        void OnDrop(InputValue value) { if (value.isPressed && currentObject != null) StopAndSpawnNext(); }
+        void OnQuit(InputValue value) { if (value.isPressed) SceneManager.LoadScene(0); }
+        void OnPause(InputValue value){  if (value.isPressed) PauseGame(); }
     #endregion
 }
