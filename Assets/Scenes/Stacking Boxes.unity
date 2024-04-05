@@ -1282,11 +1282,10 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 7322017932898097322, guid: 13109747cfd41e34e8bc7a5408b76559, type: 3}
   objectHolder: {fileID: 1231895370}
-  LivesText: {fileID: 701909060}
+  livesText: {fileID: 701909060}
   objectMoveSpeed: 4
   startingLives: 3
   maxHeightLineReferenceToObject: {fileID: 1285067321}
-  objectStartPosition: {x: 0, y: 2}
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MaxHeight_Manager : MonoBehaviour
+public class MaxHeightManager : MonoBehaviour
 {
     [SerializeField] private GameObject maxHeightLineObject;
     [SerializeField] private LayerMask layerMask; // Layer mask to filter out collisions with the object's own layer
