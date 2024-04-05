@@ -10,11 +10,12 @@ public class GameManager : MonoBehaviour
     [Header("Object References")]
     [SerializeField] private Transform[] objectPrefabs;
     [SerializeField] private Transform objectHolder;
-    [SerializeField] private TMPro.TextMeshProUGUI livesText;
     [SerializeField] private MaxHeightManager maxHeightLine;
+    [SerializeField] private TMPro.TextMeshProUGUI livesText;
+    [SerializeField] private TMPro.TextMeshProUGUI scoreText;
 
     [Header("Public Variables")]
-    public float objectMoveSpeed;
+    public float currentObjectMoveSpeed;
     public int startingLives;
 
     // Private variables
@@ -23,31 +24,33 @@ public class GameManager : MonoBehaviour
     private int livesRemaining;
     private bool isPlaying = true;
     private Vector2 vector;
+    public int score;
 
     // restricted colors
     [HideInInspector] private readonly Color[] restrictedColors =
     {
-        new Color(0.1f, 0.5f, 0.1f),  // Dark green
-        new Color(0.4f, 0.1f, 0.4f),  // Dark purple
-        new Color(0.1f, 0.1f, 0.5f),  // Dark blue
-        new Color(0f, 0f, 0f),        // Black
-        new Color(0.5f, 0.1f, 0.1f),  // Dark red
-        new Color(0.3f, 0.3f, 0f),    // Dark yellow
-        new Color(0.1f, 0.4f, 0.4f),  // Dark cyan
+        new(0.1f, 0.5f, 0.1f),  // Dark green
+        new(0.4f, 0.1f, 0.4f),  // Dark purple
+        new(0.1f, 0.1f, 0.5f),  // Dark blue
+        new(0f, 0f, 0f),        // Black
+        new(0.5f, 0.1f, 0.1f),  // Dark red
+        new(0.3f, 0.3f, 0f),    // Dark yellow
+        new(0.1f, 0.4f, 0.4f),  // Dark cyan
     };
 
     // Awake is called when the script instance is being loaded
     void Awake(){
-        objectMoveSpeed = 4f;
+        currentObjectMoveSpeed = 4f;
         startingLives = 3;
+        score = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        SpawnNewObject();
         ResetLives();
         UpdateLivesText();
-        SpawnNewObject();
     }
 
     // Update is called once per frame
@@ -86,13 +89,20 @@ public class GameManager : MonoBehaviour
     // Stops the current object and spawns the next one after a delay
     private void StopAndSpawnNext()
     {
-        currentObject = null;
-        currentRigidbody.simulated = true;
-        StartCoroutine(DelaySpawn());
+        if (currentObject != null)
+        {
+            // Increment the score when releasing the object
+            score++;
+            UpdateScoreText();
+
+            currentObject = null;
+            currentRigidbody.simulated = true;
+            StartCoroutine(DelaySpawn());
+        }
     }
 
     // Moves the current object according to input
-    private void ObjectMovement() => currentObject.transform.Translate(objectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
+    private void ObjectMovement() => currentObject.transform.Translate(currentObjectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
 
     // Checks if the placeholder for the object is empty and moves it if necessary
     private void CheckPlaceholderIsEmpty() { if (currentObject != null) ObjectMovement(); }
@@ -113,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetLives() => livesRemaining = startingLives; // Resets life count to starting value
     private void UpdateLivesText() => livesText.text = $"{livesRemaining}"; // Updates lives text in UI
+    private void UpdateScoreText() => scoreText.text = $"Score: {score}"; // Updates score text in UI
 
     // Pauses the game
     private void PauseGame()
