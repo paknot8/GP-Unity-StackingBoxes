@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Serialized fields for easy tweaking in the Unity Editor
+    [Header("Object References")]
     [SerializeField] private Transform[] objectPrefabs;
     [SerializeField] private Transform objectHolder;
     [SerializeField] private TMPro.TextMeshProUGUI livesText;
-    [SerializeField] private float objectMoveSpeed = 4f;
-    [SerializeField] private int startingLives = 3;
     [SerializeField] private MaxHeightManager maxHeightLineReferenceToObject;
+
+    [Header("Public Variables")]
+    public float objectMoveSpeed;
+    public int startingLives;
 
     // Private variables
     private Transform currentObject; // Current spawned object
@@ -20,16 +23,19 @@ public class GameManager : MonoBehaviour
     private bool isPlaying = true;
     private Vector2 vector;
 
+    void Awake(){
+        objectMoveSpeed = 4f;
+        startingLives = 3;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start Game -> GameManager.cs");
         ResetLives();
         UpdateLivesText();
         SpawnNewObject();
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckPlaceholderIsEmpty();
@@ -44,7 +50,7 @@ public class GameManager : MonoBehaviour
         // Calculate spawn position based on camera position and height
         Vector3 cameraPosition = Camera.main.transform.position;
         float cameraHeight = Camera.main.orthographicSize;
-        Vector2 spawnPosition = new Vector2(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
+        Vector2 spawnPosition = new(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
 
         currentObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
         currentObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
@@ -55,16 +61,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator DelaySpawnNewObject()
     {
         maxHeightLineReferenceToObject.Disable();
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(DelayHeightLimiter());
-        SpawnNewObject();
-    }
-
-    // Coroutine for delaying height limiter activation
-    private IEnumerator DelayHeightLimiter()
-    {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         maxHeightLineReferenceToObject.Enable();
+        yield return new WaitForSeconds(2f);
+        SpawnNewObject();
     }
 
     // Stops the current object and spawns the next one after a delay
@@ -115,22 +115,21 @@ public class GameManager : MonoBehaviour
     }
 
     #region New System Input
-    // Input actions
-    void OnMove(InputValue value) => vector = value.Get<Vector2>();
+        void OnMove(InputValue value) => vector = value.Get<Vector2>();
 
-    void OnDrop(InputValue value)
-    {
-        if (value.isPressed && currentObject != null) StopAndSpawnNext();
-    }
+        void OnDrop(InputValue value)
+        {
+            if (value.isPressed && currentObject != null) StopAndSpawnNext();
+        }
 
-    void OnQuit(InputValue value)
-    {
-        if (value.isPressed) SceneManager.LoadScene(0);
-    }
+        void OnQuit(InputValue value)
+        {
+            if (value.isPressed) SceneManager.LoadScene(0);
+        }
 
-    void OnPause(InputValue value)
-    {
-        if (value.isPressed) PauseGame();
-    }
+        void OnPause(InputValue value)
+        {
+            if (value.isPressed) PauseGame();
+        }
     #endregion
 }

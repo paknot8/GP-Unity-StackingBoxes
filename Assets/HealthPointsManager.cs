@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class HealthPointsManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 

@@ -10,15 +10,10 @@ public class MaxHeightManager : MonoBehaviour
 
     private MainCameraManager mainCameraManager;
 
-    void Awake()
-    {
-        hits = new RaycastHit2D[rayCount]; // Initialize hits array here
-        mainCameraManager = Camera.main.GetComponent<MainCameraManager>();
-    }
-
     // Start is called before the first frame update
     void Start(){
-
+        hits = new RaycastHit2D[rayCount]; // Initialize hits array here
+        mainCameraManager = Camera.main.GetComponent<MainCameraManager>();
     }
 
     public void Enable()
