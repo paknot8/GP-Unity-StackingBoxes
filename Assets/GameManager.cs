@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour
     // Coroutine for delayed object spawning and object enabler
     private IEnumerator DelaySpawn()
     {
-        maxHeightLine.Disable();
+        maxHeightLine.DisableObject();
         yield return new WaitForSeconds(1f);
-        maxHeightLine.Enable();
+        maxHeightLine.EnableObject();
         yield return new WaitForSeconds(2f);
         SpawnNewObject();
     }
