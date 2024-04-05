@@ -8,12 +8,12 @@ public class MaxHeight_Manager : MonoBehaviour
     [SerializeField] private int rayCount = 50; // Number of rays to cast
     [SerializeField] private RaycastHit2D[] hits; // Moved initialization to Start method
 
-    private MainCamera_Manager mainCameraManager;
+    private MainCameraManager mainCameraManager;
 
     void Awake()
     {
         hits = new RaycastHit2D[rayCount]; // Initialize hits array here
-        mainCameraManager = Camera.main.GetComponent<MainCamera_Manager>();
+        mainCameraManager = Camera.main.GetComponent<MainCameraManager>();
     }
 
     // Start is called before the first frame update

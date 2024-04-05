@@ -23,7 +23,7 @@ public class Game_Manager : MonoBehaviour
         private int livesRemaining;
         private bool isPlaying = true;
 
-        private MainCamera_Manager mainCameraManager;
+        private MainCameraManager mainCameraManager;
         
     #endregion
 
