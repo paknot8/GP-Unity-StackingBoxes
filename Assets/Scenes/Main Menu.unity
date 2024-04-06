@@ -2113,7 +2113,7 @@ GameObject:
   - component: {fileID: 1040610627}
   - component: {fileID: 1040610628}
   m_Layer: 0
-  m_Name: Game Volume
+  m_Name: Global Volume Script
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

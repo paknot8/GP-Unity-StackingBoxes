@@ -311,6 +311,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &109519234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109519235}
+  - component: {fileID: 109519236}
+  m_Layer: 0
+  m_Name: AudioLoaderObjectScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109519235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109519234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 792663004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109519236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109519234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c492362c78ab54c4eb56a5bd1ae65f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &329866553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1203,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 109519235}
   - {fileID: 7942309938165310582}
   - {fileID: 890076757}
   m_Father: {fileID: 0}
@@ -1221,7 +1266,7 @@ GameObject:
   - component: {fileID: 890076758}
   m_Layer: 0
   m_Name: Lose Sound
-  m_TagString: Untagged
+  m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1251,11 +1296,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 44d39d7f25212f2418e2a3fc557581b0, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 135075969b5144440b1d757f1124a818, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2478,6 +2523,10 @@ PrefabInstance:
     - target: {fileID: 7679038717676262818, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
       propertyPath: m_Name
       value: Background Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679038717676262818, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
+      propertyPath: m_TagString
+      value: Music
       objectReference: {fileID: 0}
     - target: {fileID: 8000111645616442622, guid: b59929660d05fea46ba5bdd754051e78, type: 3}
       propertyPath: m_LocalPosition.x

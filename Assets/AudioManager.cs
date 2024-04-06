@@ -1,18 +1,14 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] Slider musicSlider; // Slider for controlling music volume
-    [SerializeField] Slider soundSlider; // Slider for controlling sound effects volume
+    [SerializeField] private Slider musicSlider; // Slider for controlling music volume
+    [SerializeField] private Slider soundSlider; // Slider for controlling sound effects volume
 
-    void Start()
-    {
-        LoadVolumeLevels();
-    }
+    void Start() => LoadVolumeLevels();
 
-    private void LoadVolumeLevels()
+    public void LoadVolumeLevels()
     {
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
@@ -22,7 +18,7 @@ public class AudioManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat("soundVolume", 1);
         }
-        Load();
+        LoadAllAudioSettings();
     }
 
     // Method to change the volume of all AudioSources tagged as "Music" based on the music slider value
@@ -35,7 +31,7 @@ public class AudioManager : MonoBehaviour
                 audioSource.volume = musicSlider.value;
             }
         }
-        Save();
+        SaveMusic();
     }
 
     // Method to change the volume of all AudioSources tagged as "Sound" based on the sound slider value
@@ -49,19 +45,19 @@ public class AudioManager : MonoBehaviour
             }
         }
         // Save the changes made to the sound volume
-        PlayerPrefs.SetFloat("soundVolume", soundSlider.value);
+        SaveSound();
     }
 
-    // Load volume settings from PlayerPrefs
-    private void Load()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        soundSlider.value = PlayerPrefs.GetFloat("soundVolume");
-    }
+    #region Load & Save (Music and Sound Effects)
+        // Load volume settings from PlayerPrefs
+        private void LoadAllAudioSettings()
+        {
+            musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+            soundSlider.value = PlayerPrefs.GetFloat("soundVolume");
+        }
 
-    // Save volume settings to PlayerPrefs
-    private void Save()
-    {
-        PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
-    }
+        // Save volume settings to PlayerPrefs
+        private void SaveMusic() => PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
+        private void SaveSound() => PlayerPrefs.SetFloat("soundVolume", soundSlider.value);
+    #endregion
 }
