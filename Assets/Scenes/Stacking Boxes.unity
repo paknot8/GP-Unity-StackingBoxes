@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 109519235}
   - component: {fileID: 109519236}
   m_Layer: 0
-  m_Name: AudioLoaderObjectScript
+  m_Name: Script-AudioLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,12 +336,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109519234}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 146.31854, y: 203.85219, z: -0.06347108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 792663004}
+  m_Father: {fileID: 1563994388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &109519236
 MonoBehaviour:
@@ -1203,7 +1203,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 109519235}
   - {fileID: 7942309938165310582}
   - {fileID: 890076757}
   m_Father: {fileID: 0}
@@ -2339,6 +2338,7 @@ Transform:
   m_Children:
   - {fileID: 1115472743}
   - {fileID: 1285067320}
+  - {fileID: 109519235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1939170593

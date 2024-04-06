@@ -1635,6 +1635,7 @@ Transform:
   m_Children:
   - {fileID: 1330437484}
   - {fileID: 1079049404}
+  - {fileID: 1040610627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &889929112
@@ -2113,7 +2114,7 @@ GameObject:
   - component: {fileID: 1040610627}
   - component: {fileID: 1040610628}
   m_Layer: 0
-  m_Name: Global Volume Script
+  m_Name: Script-GlobalVolumeSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2128,11 +2129,11 @@ Transform:
   m_GameObject: {fileID: 1040610626}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.535828, y: -14.551575, z: 0.32521945}
+  m_LocalPosition: {x: -37.440063, y: 7.843048, z: -0.0651038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2046358814}
+  m_Father: {fileID: 875115223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1040610628
 MonoBehaviour:
@@ -2368,7 +2369,7 @@ GameObject:
   - component: {fileID: 1079049404}
   - component: {fileID: 1079049405}
   m_Layer: 0
-  m_Name: SettingsObjectScript
+  m_Name: Script-SettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2749,7 +2750,7 @@ GameObject:
   - component: {fileID: 1330437484}
   - component: {fileID: 1330437483}
   m_Layer: 0
-  m_Name: MainMenuObjectScript
+  m_Name: Script-MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4409,7 +4410,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1040610627}
   - {fileID: 452216124}
   - {fileID: 2096530795}
   m_Father: {fileID: 0}
