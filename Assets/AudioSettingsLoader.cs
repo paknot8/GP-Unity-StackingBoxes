@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AudioLoader : MonoBehaviour
+public class AudioSettingsLoader : MonoBehaviour
 {
     void Start()
     {
