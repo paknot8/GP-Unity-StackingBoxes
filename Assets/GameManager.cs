@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MaxHeightManager maxHeightLine;
     [SerializeField] private TMPro.TextMeshProUGUI livesText;
     [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+    [SerializeField] private GameUI gameUI;
 
     [Header("Public Variables")]
     public float currentObjectMoveSpeed;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     private Transform currentObject; // Current spawned object
     private Rigidbody2D currentRigidbody; // Rigidbody of the object
     private int livesRemaining;
-    private bool isPlaying = true;
+    public bool isPlaying = true;
     private Vector2 vector;
     public int score;
 
@@ -125,17 +126,21 @@ public class GameManager : MonoBehaviour
     private void UpdateLivesText() => livesText.text = $"{livesRemaining}"; // Updates lives text in UI
     private void UpdateScoreText() => scoreText.text = $"Score: {score}"; // Updates score text in UI
 
-    // Pauses the game
     private void PauseGame()
     {
         Time.timeScale = isPlaying ? 0f : 1f;
         isPlaying = !isPlaying;
+        gameUI.OnGamePaused();
     }
 
     #region New System Input
         void OnMove(InputValue value) => vector = value.Get<Vector2>();
         void OnDrop(InputValue value) { if (value.isPressed && currentObject != null) StopAndSpawnNext(); }
         void OnQuit(InputValue value) { if (value.isPressed) SceneManager.LoadScene(0); }
-        void OnPause(InputValue value){  if (value.isPressed) PauseGame(); }
+        void OnPause(InputValue value){  
+            if (value.isPressed) {
+                PauseGame();
+            }
+        }
     #endregion
 }

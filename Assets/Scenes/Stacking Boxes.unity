@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 339226818}
   - component: {fileID: 339226817}
   m_Layer: 5
-  m_Name: GameOver_Canvas
+  m_Name: GamePause_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2276,8 +2276,10 @@ MonoBehaviour:
   maxHeightLine: {fileID: 1285067321}
   livesText: {fileID: 701909060}
   scoreText: {fileID: 341493034}
+  gameUI: {fileID: 1442981340}
   currentObjectMoveSpeed: 4
   startingLives: 3
+  isPlaying: 1
   score: 0
 --- !u!4 &1115472743
 Transform:
@@ -3066,6 +3068,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3502394f423a5f5488cf5163f6292776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1115472742}
+  GameScreenCanvas: {fileID: 94211127}
+  GamePauseCanvas: {fileID: 339226815}
 --- !u!1 &1563994387
 GameObject:
   m_ObjectHideFlags: 0
