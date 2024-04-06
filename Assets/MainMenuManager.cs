@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // Reference to the SettingsManager script
-    public SettingsManager settingsManager;
-    // GameObject to enable/disable
-    public GameObject mainMenuToggle;
+    
+    public SettingsManager settingsManager; // Reference to the SettingsManager script
+    public GameObject mainMenuToggle; // GameObject to enable/disable
+    public TMPro.TextMeshProUGUI topScoreText;
 
     public void PlayGame()
     {

@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     [Header("Object References")]
     [SerializeField] private Transform[] objectPrefabs;
     [SerializeField] private Transform objectHolder;
-    [SerializeField] private MaxHeightManager maxHeightLine;
     [SerializeField] private TMPro.TextMeshProUGUI livesText;
     [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+
+    // Script References
+    [SerializeField] private MaxHeightManager maxHeightLine;
     [SerializeField] private GameUI gameUI;
+    [SerializeField] private ScoreManager scoreManager;
 
     [Header("Public Variables")]
     public float currentObjectMoveSpeed;
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
         SpawnNewObject();
         ResetLives();
         UpdateLivesText();
+        scoreManager.LoadScore();
     }
 
     // Update is called once per frame
@@ -144,14 +148,17 @@ public class GameManager : MonoBehaviour
         gameUI.OnGamePaused();
     }
 
+    // Method to handle game over and save the score
     private void GameOver()
     {
-        // Toggle the game's time scale between paused and normal
         if (isPlaying)
         {
             Time.timeScale = 0f; // Pause the game
             isPlaying = false;
             gameUI.OnGameOver();
+
+            // Save the score when the game is over
+            scoreManager.SaveScore();
         }
     }
 
