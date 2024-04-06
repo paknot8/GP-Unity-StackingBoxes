@@ -48,7 +48,8 @@ public class AudioManager : MonoBehaviour
                 audioSource.volume = soundSlider.value;
             }
         }
-        Save(); // Save the changes made to the sound volume
+        // Save the changes made to the sound volume
+        PlayerPrefs.SetFloat("soundVolume", soundSlider.value);
     }
 
     // Load volume settings from PlayerPrefs
@@ -62,6 +63,5 @@ public class AudioManager : MonoBehaviour
     private void Save()
     {
         PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
-        PlayerPrefs.SetFloat("soundVolume", soundSlider.value);
     }
 }
