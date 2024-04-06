@@ -128,9 +128,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetLives() => livesRemaining = startingLives; // Resets life count to starting value
-    private void UpdateLivesText() => livesText.text = $"{livesRemaining}"; // Updates lives text in UI
-    private void UpdateScoreText() => scoreText.text = $"Score: {score}"; // Updates score text in UI
+    // UI Text updates
+    private void ResetLives() => livesRemaining = startingLives;
+    private void UpdateLivesText() => livesText.text = $"{livesRemaining}";
+    private void UpdateScoreText() => scoreText.text = $"Score: {score}";
 
     private void PauseGame()
     {
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour
             gameUI.OnGameOver();
 
             // Save the score when the game is over
-            scoreManager.SaveScore();
+            scoreManager.SaveScore(score);
         }
     }
 

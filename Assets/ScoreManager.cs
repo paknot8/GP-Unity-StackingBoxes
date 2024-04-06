@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {   
-    [SerializeField] private GameManager gameManager;
+    public int passedScore = 0;
     private const string ScoreKey = "Score"; // Key for saving and loading the score
 
     // Method to save the score
-    public void SaveScore()
+    public void SaveScore(int score)
     {
-        PlayerPrefs.SetInt(ScoreKey, gameManager.score);
+        passedScore = score;
+        PlayerPrefs.SetInt(ScoreKey, score);
         PlayerPrefs.Save();
     }
 
@@ -17,7 +18,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(ScoreKey))
         {
-            gameManager.score = PlayerPrefs.GetInt(ScoreKey);
+            passedScore = PlayerPrefs.GetInt(ScoreKey);
             // gameManager.UpdateTopScoreText(); // Update the score text after loading
         }
     }
@@ -25,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     // Method to reset the score
     public void ResetScore()
     {
-        gameManager.score = 0;
+        passedScore = 0;
         //gameManager.UpdateScoreText();
     }
 }

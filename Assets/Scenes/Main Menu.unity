@@ -2817,6 +2817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsManager: {fileID: 1079049405}
+  scoreManager: {fileID: 1527452439}
   mainMenuToggle: {fileID: 768693646}
   topScoreText: {fileID: 1484321485}
 --- !u!4 &1330437484

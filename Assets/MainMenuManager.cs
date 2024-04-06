@@ -3,10 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    
-    public SettingsManager settingsManager; // Reference to the SettingsManager script
-    public GameObject mainMenuToggle; // GameObject to enable/disable
-    public TMPro.TextMeshProUGUI topScoreText;
+    // References
+    public SettingsManager settingsManager; 
+    public ScoreManager scoreManager;
+
+    [SerializeField] private GameObject mainMenuToggle; // GameObject to enable/disable
+    [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
+
+    void Start(){
+
+    }
+    void Update(){
+        scoreManager.LoadScore();
+    }
+
+    private void UpdateScoreText() => topScoreText.text = $"Your Top Score : {scoreManager.passedScore}";
 
     public void PlayGame()
     {
