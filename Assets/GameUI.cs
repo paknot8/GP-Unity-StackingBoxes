@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject GameScreenCanvas;
     [SerializeField] private GameObject GamePauseCanvas;
+    [SerializeField] private GameObject GameOverCanvas;
 
     [SerializeField] private float transparacy;
 
@@ -27,7 +28,7 @@ public class GameUI : MonoBehaviour
         
     }
 
-    private void UpdateScoreText() => scoreText.text = $"My Score: {gameManager.score}";
+    private void UpdateScoreText() => scoreText.text = $"Your Score : {gameManager.score}";
 
     public void RestartGame()
     {
@@ -40,6 +41,17 @@ public class GameUI : MonoBehaviour
         ResetValues();
         SceneManager.LoadScene(0);
     }
+
+    public void ExitGame()
+    {
+        ResetValues();
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
+    }
+
 
     private void ResetValues()
     {
@@ -60,6 +72,17 @@ public class GameUI : MonoBehaviour
         {
             GameScreenCanvas.SetActive(true);
             GamePauseCanvas.SetActive(false);
+        }
+    }
+
+    public void OnGameOver()
+    {
+        UpdateScoreText();
+        if (!gameManager.isPlaying)
+        {
+            GameScreenCanvas.SetActive(false);
+            GamePauseCanvas.SetActive(false);
+            GameOverCanvas.SetActive(true);
         }
     }
 

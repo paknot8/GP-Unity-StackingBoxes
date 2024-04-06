@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         if (livesRemaining == 0)
         {
             Debug.Log("You Lost!");
-            SceneManager.LoadScene(0);
+            GameOver();
         }
     }
 
@@ -141,9 +141,18 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f; // Resume the game
             isPlaying = true;
         }
-        
-        // Call the method to update the UI based on the game's pause state
         gameUI.OnGamePaused();
+    }
+
+    private void GameOver()
+    {
+        // Toggle the game's time scale between paused and normal
+        if (isPlaying)
+        {
+            Time.timeScale = 0f; // Pause the game
+            isPlaying = false;
+            gameUI.OnGameOver();
+        }
     }
 
     #region New System Input
