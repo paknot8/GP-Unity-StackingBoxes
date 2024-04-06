@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private Transform currentObject; // Current spawned object
     private Rigidbody2D currentRigidbody; // Rigidbody of the object
     private int livesRemaining;
-    public bool isPlaying = true;
+    public bool isPlaying;
     private Vector2 vector;
     public int score;
 
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         currentObjectMoveSpeed = 4f;
         startingLives = 3;
         score = 0;
+        isPlaying = true;
     }
 
     // Start is called before the first frame update
@@ -128,8 +129,19 @@ public class GameManager : MonoBehaviour
 
     private void PauseGame()
     {
-        Time.timeScale = isPlaying ? 0f : 1f;
-        isPlaying = !isPlaying;
+        // Toggle the game's time scale between paused and normal
+        if (isPlaying)
+        {
+            Time.timeScale = 0f; // Pause the game
+            isPlaying = false;
+        }
+        else
+        {
+            Time.timeScale = 1f; // Resume the game
+            isPlaying = true;
+        }
+        
+        // Call the method to update the UI based on the game's pause state
         gameUI.OnGamePaused();
     }
 

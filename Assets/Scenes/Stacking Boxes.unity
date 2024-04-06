@@ -555,7 +555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &339226816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3068,6 +3068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3502394f423a5f5488cf5163f6292776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 425802680}
   gameManager: {fileID: 1115472742}
   GameScreenCanvas: {fileID: 94211127}
   GamePauseCanvas: {fileID: 339226815}
