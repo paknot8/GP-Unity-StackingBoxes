@@ -24,7 +24,7 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        UpdateScoreText();
+        
     }
 
     private void UpdateScoreText() => scoreText.text = $"My Score: {gameManager.score}";
@@ -50,6 +50,7 @@ public class GameUI : MonoBehaviour
 
     public void OnGamePaused()
     {
+        UpdateScoreText();
         if (!gameManager.isPlaying)
         {
             GameScreenCanvas.SetActive(false);

@@ -112,8 +112,9 @@ public class GameManager : MonoBehaviour
     // Subtracts one life point and updates UI
     public void SubtractLifePoint()
     {
-        livesRemaining = Mathf.Max(livesRemaining - 1, 0);
+        livesRemaining = Mathf.Max(0, livesRemaining - 1); // ensure that the number never goes to 0 when substracting
         livesText.text = $"{livesRemaining}";
+        UpdateScoreText();
 
         // Load main menu scene if lives run out
         if (livesRemaining == 0)
