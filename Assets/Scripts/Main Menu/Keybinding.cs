@@ -32,36 +32,28 @@ public class Keybinding : MonoBehaviour
         }
     }
 
-    public void OnMoveLeftInputChange()
+    public void OnMoveLeftInputChange(string newKey)
     {
-        RebindAction(moveLeftInputField, moveLeftAction);
+        RebindAction(moveLeftInputField, moveLeftAction, newKey);
     }
 
-    public void OnMoveRightInputChange()
+    public void OnMoveRightInputChange(string newKey)
     {
-        RebindAction(moveRightInputField, moveRightAction);
+        RebindAction(moveRightInputField, moveRightAction, newKey);
     }
 
-    public void OnDropInputChange()
+    public void OnDropInputChange(string newKey)
     {
-        RebindAction(dropInputField, dropAction);
+        RebindAction(dropInputField, dropAction, newKey);
     }
 
-    private void RebindAction(TMP_InputField inputField, InputActionReference actionReference)
+    private void RebindAction(TMP_InputField inputField, InputActionReference actionReference, string newKey)
     {
-        inputField.text = "Press any key...";
+        inputField.text = newKey;
         actionReference.action.Disable();
-        actionReference.action.performed += ctx =>
-        {
-            var newKey = ctx.ReadValueAsButton();
-            if (newKey)
-            {
-                actionReference.action.ApplyBindingOverride(0, newKey.ToString());
-                inputField.text = newKey.ToString(); // Update display with the new key
-                actionReference.action.Enable();
-            }
-        };
+        actionReference.action.ApplyBindingOverride(0, newKey);
         actionReference.action.Enable();
+        SaveKeybindings();
     }
 
     private void OnDrop()
@@ -69,13 +61,20 @@ public class Keybinding : MonoBehaviour
         // Handle drop action here
     }
 
-    private void LoadKeybindings()
+    public void LoadKeybindings()
     {
         // Load keybindings from player preferences or wherever they are saved
+        moveLeftInputField.text = PlayerPrefs.GetString("MoveLeftKey", "A");
+        moveRightInputField.text = PlayerPrefs.GetString("MoveRightKey", "D");
+        // Load drop keybinding from saved data
     }
 
     private void SaveKeybindings()
     {
         // Save keybindings to player preferences or wherever you want to save them
+        PlayerPrefs.SetString("MoveLeftKey", moveLeftInputField.text);
+        PlayerPrefs.SetString("MoveRightKey", moveRightInputField.text);
+        // Save drop keybinding
+        PlayerPrefs.Save();
     }
 }
