@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
             // Spawn position based on camera position and height
             Vector3 cameraPosition = Camera.main.transform.position;
             float cameraHeight = Camera.main.orthographicSize;
-            Vector2 spawnPosition = new Vector2(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
+            Vector2 spawnPosition = new(cameraPosition.x, cameraPosition.y + cameraHeight - 2f);
 
             // Instantiate the object and set its color
             currentObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
@@ -141,7 +141,6 @@ public class GameManager : MonoBehaviour
             // Load main menu scene if lives run out
             if (livesRemaining == 0)
             {
-                Debug.Log("You Lost!");
                 gameOverSound.Play();
                 GameOver();
             }
@@ -186,31 +185,29 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region New System Input
-    //void OnMove(InputValue value) => vector = value.Get<Vector2>();
-
-    void OnMoveLeft(InputValue value)
-    {
-        vector = value.Get<Vector2>();
-        vector.y = 0f; // Make sure vertical input is zero
-    }
-
-    void OnMoveRight(InputValue value)
-    {
-        vector = value.Get<Vector2>();
-        vector.y = 0f; // Make sure vertical input is zero
-    }
-
-    void OnDrop(InputValue value)
-    {
-        if (value.isPressed && currentObject != null) StopAndSpawnNext();
-    }
-
-    void OnPause(InputValue value)
-    {
-        if (value.isPressed)
+        void OnMoveLeft(InputValue value)
         {
-            PauseGame();
+            vector = value.Get<Vector2>();
+            vector.y = 0f; // Make sure vertical input is zero
         }
-    }
+
+        void OnMoveRight(InputValue value)
+        {
+            vector = value.Get<Vector2>();
+            vector.y = 0f; // Make sure vertical input is zero
+        }
+
+        void OnDrop(InputValue value)
+        {
+            if (value.isPressed && currentObject != null) StopAndSpawnNext();
+        }
+
+        void OnPause(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                PauseGame();
+            }
+        }
     #endregion
 }
