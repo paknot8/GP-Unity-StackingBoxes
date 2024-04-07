@@ -47,7 +47,7 @@ public class Keybinding : MonoBehaviour
     {
         inputField.text = newKey;
         actionReference.action.Disable();
-        actionReference.action.ApplyBindingOverride(0, newKey);
+        actionReference.action.ApplyBindingOverride(newKey);
         actionReference.action.Enable();
         SaveKeybindings();
     }

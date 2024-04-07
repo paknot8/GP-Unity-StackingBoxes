@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.InputSystem.Utilities;
 
 
 // GameManager class responsible for managing the game flow and objects.
@@ -189,17 +187,52 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region New System Input
-    void OnMoveLeft(InputValue value)
+    // void OnMoveLeft(InputValue value)
+    // {
+    //     vector = value.Get<Vector2>();
+    //     vector.y = 0f; // Make sure vertical input is zero
+    // }
+
+    // void OnMoveRight(InputValue value)
+    // {
+    //     vector = value.Get<Vector2>();
+    //     vector.y = 0f; // Make sure vertical input is zero
+    // }
+
+void OnMoveLeft(InputValue value)
+{
+    // Get the input vector from the input value
+    vector = value.Get<Vector2>();
+
+    // Check if the 'a' key is pressed
+    if (vector.x < 0)
     {
-        vector = value.Get<Vector2>();
-        vector.y = 0f; // Make sure vertical input is zero
+        // Move the object left according to the input
+        ObjectMovement();
     }
 
-    void OnMoveRight(InputValue value)
+    Debug.Log(value);
+}
+
+
+void OnMoveRight(InputValue value)
+{
+    // Get the input vector from the input value
+    vector = value.Get<Vector2>();
+
+    // Make sure vertical input is zero
+    vector.y = 0f;
+
+    // Apply movement to the right when the right bound key is pressed
+    if (value.isPressed && currentObject != null)
     {
-        vector = value.Get<Vector2>();
-        vector.y = 0f; // Make sure vertical input is zero
+        // Move the object right according to the input
+        ObjectMovement();
     }
+
+    Debug.Log(value);
+}
+
 
     void OnDrop(InputValue value)
     {

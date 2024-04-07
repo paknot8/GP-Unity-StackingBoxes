@@ -2901,7 +2901,6 @@ MonoBehaviour:
   startingLives: 3
   isPlaying: 1
   score: 0
-  inputActions: {fileID: -944628639613478452, guid: 72ec9ad919736164ea577013399e1147, type: 3}
 --- !u!4 &1115472743
 Transform:
   m_ObjectHideFlags: 0
@@ -3353,7 +3352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 72ec9ad919736164ea577013399e1147, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -3364,7 +3363,23 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a132db16-e6eb-4ab5-8f3c-95167f711704
+    m_ActionName: PlayerControls/MoveLeft[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c2cdca0-e438-4a13-bceb-5e8e420e56b6
+    m_ActionName: PlayerControls/MoveRight[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7276649f-6d92-4d4e-9f47-acf03fcde990
+    m_ActionName: PlayerControls/Drop[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7a25fcf0-1f63-4438-86c8-9c7a52974eed
+    m_ActionName: PlayerControls/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
