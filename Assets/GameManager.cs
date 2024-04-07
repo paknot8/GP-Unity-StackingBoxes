@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform objectHolder;
     [SerializeField] private TMPro.TextMeshProUGUI livesText;
     [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+    [SerializeField] private AudioSource scoreSound;
+    [SerializeField] private AudioSource substractLifeSound;
+    [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource mainThemeMusic;
+    [SerializeField] private AudioSource gameOverMusic;
 
     // Script References
     [SerializeField] private MaxHeightManager maxHeightLine;
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour
         {
             // Increment the score when releasing the object
             score++;
+            scoreSound.Play();
             UpdateScoreText();
 
             currentObject = null;
@@ -118,12 +124,14 @@ public class GameManager : MonoBehaviour
     {
         livesRemaining = Mathf.Max(0, livesRemaining - 1); // ensure that the number never goes to 0 when substracting
         livesText.text = $"{livesRemaining}";
+        if (livesRemaining > 0) substractLifeSound.Play();
         UpdateScoreText();
 
         // Load main menu scene if lives run out
         if (livesRemaining == 0)
         {
             Debug.Log("You Lost!");
+            gameOverSound.Play();
             GameOver();
         }
     }
@@ -156,10 +164,12 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f; // Pause the game
             isPlaying = false;
-            gameUI.OnGameOver();
+            mainThemeMusic.Stop();
+            gameOverMusic.Play();
+            
+            // scoreManager.SaveScore(score); // Save the score when the game is over
 
-            // Save the score when the game is over
-            scoreManager.SaveScore(score);
+            gameUI.OnGameOver();
         }
     }
 

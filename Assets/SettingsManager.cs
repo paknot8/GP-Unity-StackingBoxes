@@ -7,18 +7,6 @@ public class SettingsManager : MonoBehaviour
     // GameObject to enable/disable
     public GameObject SettingsToggle;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Method to disable the object
     public void DisableObject()
     {

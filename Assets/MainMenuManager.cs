@@ -10,9 +10,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuToggle; // GameObject to enable/disable
     [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
 
-    void Start(){
+    [SerializeField] private AudioSource buttonClickSound;
 
-    }
     void Update(){
         scoreManager.LoadScore();
     }
@@ -21,11 +20,13 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        buttonClickSound.Play();
         SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
     {
+        buttonClickSound.Play();
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
         #else
@@ -35,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void GoToSettings()
     {
+        buttonClickSound.Play();
         if (settingsManager != null)
         {
             mainMenuToggle.SetActive(false);
@@ -48,6 +50,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        buttonClickSound.Play();
         if (mainMenuToggle != null)
         {
             mainMenuToggle.SetActive(true);

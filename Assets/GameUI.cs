@@ -8,9 +8,11 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image panelImage; // Use Image component for UI elements
 
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private GameObject GameScreenCanvas;
-    [SerializeField] private GameObject GamePauseCanvas;
-    [SerializeField] private GameObject GameOverCanvas;
+    [SerializeField] private GameObject gameScreenCanvas;
+    [SerializeField] private GameObject gamePauseCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
+
+    [SerializeField] private AudioSource buttonClickSound;
 
     [SerializeField] private float transparacy;
 
@@ -21,11 +23,6 @@ public class GameUI : MonoBehaviour
     void Start()
     {
         SetPanelTransparency(transparacy);
-    }
-
-    void Update()
-    {
-        
     }
 
     private void UpdateScoreText() => scoreText.text = $"Your Score : {gameManager.score}";
@@ -55,6 +52,7 @@ public class GameUI : MonoBehaviour
 
     private void ResetValues()
     {
+        buttonClickSound.Play();
         gameManager.isPlaying = true;
         Time.timeScale = 1;
         OnGamePaused();
@@ -65,13 +63,13 @@ public class GameUI : MonoBehaviour
         UpdateScoreText();
         if (!gameManager.isPlaying)
         {
-            GameScreenCanvas.SetActive(false);
-            GamePauseCanvas.SetActive(true);
+            gameScreenCanvas.SetActive(false);
+            gamePauseCanvas.SetActive(true);
         }
         else
         {
-            GameScreenCanvas.SetActive(true);
-            GamePauseCanvas.SetActive(false);
+            gameScreenCanvas.SetActive(true);
+            gamePauseCanvas.SetActive(false);
         }
     }
 
@@ -80,9 +78,9 @@ public class GameUI : MonoBehaviour
         UpdateScoreText();
         if (!gameManager.isPlaying)
         {
-            GameScreenCanvas.SetActive(false);
-            GamePauseCanvas.SetActive(false);
-            GameOverCanvas.SetActive(true);
+            gameScreenCanvas.SetActive(false);
+            gamePauseCanvas.SetActive(false);
+            gameOverCanvas.SetActive(true);
         }
     }
 
