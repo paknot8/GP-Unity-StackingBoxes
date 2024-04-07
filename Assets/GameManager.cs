@@ -175,6 +175,8 @@ public class GameManager : MonoBehaviour
 
     #region New System Input
         void OnMove(InputValue value) => vector = value.Get<Vector2>();
+        // void OnMoveLeft(InputValue value) => vector = value.Get<Vector2>();
+        // void OnMoveRight(InputValue value) => vector = value.Get<Vector2>();
         void OnDrop(InputValue value) { if (value.isPressed && currentObject != null) StopAndSpawnNext(); }
         void OnPause(InputValue value){  
             if (value.isPressed) {
