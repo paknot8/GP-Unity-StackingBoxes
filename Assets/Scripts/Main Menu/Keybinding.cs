@@ -16,10 +16,6 @@ public class Keybinding : MonoBehaviour
     {
         // Load saved keybindings
         LoadKeybindings();
-
-        // Update UI to display current keybindings
-        moveLeftInputField.text = "A"; // Set left key to "A"
-        moveRightInputField.text = "D"; // Set right key to "D"
         dropInputField.text = dropAction.action.GetBindingDisplayString();
     }
 
@@ -64,17 +60,29 @@ public class Keybinding : MonoBehaviour
     public void LoadKeybindings()
     {
         // Load keybindings from player preferences or wherever they are saved
-        moveLeftInputField.text = PlayerPrefs.GetString("MoveLeftKey", "A");
-        moveRightInputField.text = PlayerPrefs.GetString("MoveRightKey", "D");
+        moveLeftInputField.text = PlayerPrefs.GetString("MoveLeftKey");
+        moveRightInputField.text = PlayerPrefs.GetString("MoveRightKey");
+        Debug.Log(moveLeftInputField.text);
+        Debug.Log(moveRightInputField.text);
         // Load drop keybinding from saved data
     }
 
-    private void SaveKeybindings()
+    public void SaveKeybindings()
     {
         // Save keybindings to player preferences or wherever you want to save them
         PlayerPrefs.SetString("MoveLeftKey", moveLeftInputField.text);
         PlayerPrefs.SetString("MoveRightKey", moveRightInputField.text);
+
+        Debug.Log(PlayerPrefs.GetString("MoveLeftKey"));
+        Debug.Log(PlayerPrefs.GetString("MoveRightKey"));
+
         // Save drop keybinding
         PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        // Save keybindings when the application quits
+        SaveKeybindings();
     }
 }

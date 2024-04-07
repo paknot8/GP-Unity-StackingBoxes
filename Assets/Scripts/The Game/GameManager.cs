@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         // Start is called before the first frame update
         void Start()
         {
+            LoadKeybindings(); // Load saved keybindings
             SpawnNewObject();
             ResetLives();
             UpdateLivesText();
@@ -69,6 +70,33 @@ public class GameManager : MonoBehaviour
         // Update is called once per frame
         void Update() => CheckPlaceholderIsEmpty();
     #endregion
+
+    // Load keybindings from PlayerPrefs
+    private void LoadKeybindings()
+    {
+        // Load keybindings from PlayerPrefs or wherever they are saved
+        string moveLeftKey = PlayerPrefs.GetString("MoveLeftKey", "a");
+        string moveRightKey = PlayerPrefs.GetString("MoveRightKey", "d");
+
+        // Set keybindings in GameManager
+        SetKeybindings(moveLeftKey, moveRightKey);
+    }
+
+    // Set keybindings in GameManager
+    private void SetKeybindings(string moveLeftKey, string moveRightKey)
+    {
+        // You may need to adjust this based on your implementation
+        // For example, you might want to update the vector directly, or trigger events to handle keybindings
+    }
+
+    // Save keybindings to PlayerPrefs
+    private void SaveKeybindings()
+    {
+        // Save keybindings to PlayerPrefs or wherever you want to save them
+        PlayerPrefs.SetString("MoveLeftKey", "a"); // Example: You would replace "a" with the actual left key binding
+        PlayerPrefs.SetString("MoveRightKey", "d"); // Example: You would replace "d" with the actual right key binding
+        PlayerPrefs.Save();
+    }
 
     #region Player Object & Spawning
         // Spawns a new object with random properties
