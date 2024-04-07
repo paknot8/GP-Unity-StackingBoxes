@@ -114,7 +114,12 @@ public class GameManager : MonoBehaviour
     }
 
     // Moves the current object according to input
-    private void ObjectMovement() => currentObject.transform.Translate(currentObjectMoveSpeed * Time.deltaTime * new Vector2(vector.x, vector.y));
+    private void ObjectMovement()
+    {
+        Vector2 moveInput = new Vector2(vector.x, vector.y);
+        moveInput.x *= currentObjectMoveSpeed * Time.deltaTime; // Multiply only by speed for horizontal movement
+        currentObject.transform.Translate(moveInput);
+    }
 
     // Checks if the placeholder for the object is empty and moves it if necessary
     private void CheckPlaceholderIsEmpty() { if (currentObject != null) ObjectMovement(); }
@@ -174,14 +179,31 @@ public class GameManager : MonoBehaviour
     }
 
     #region New System Input
-        void OnMove(InputValue value) => vector = value.Get<Vector2>();
-        // void OnMoveLeft(InputValue value) => vector = value.Get<Vector2>();
-        // void OnMoveRight(InputValue value) => vector = value.Get<Vector2>();
-        void OnDrop(InputValue value) { if (value.isPressed && currentObject != null) StopAndSpawnNext(); }
-        void OnPause(InputValue value){  
-            if (value.isPressed) {
-                PauseGame();
-            }
+    //void OnMove(InputValue value) => vector = value.Get<Vector2>();
+
+    void OnMoveLeft(InputValue value)
+    {
+        vector = value.Get<Vector2>();
+        vector.y = 0f; // Make sure vertical input is zero
+    }
+
+    void OnMoveRight(InputValue value)
+    {
+        vector = value.Get<Vector2>();
+        vector.y = 0f; // Make sure vertical input is zero
+    }
+
+    void OnDrop(InputValue value)
+    {
+        if (value.isPressed && currentObject != null) StopAndSpawnNext();
+    }
+
+    void OnPause(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            PauseGame();
         }
+    }
     #endregion
 }
