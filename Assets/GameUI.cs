@@ -60,6 +60,7 @@ public class GameUI : MonoBehaviour
 
     public void OnGamePaused()
     {
+        buttonClickSound.Play();
         UpdateScoreText();
         if (!gameManager.isPlaying)
         {
