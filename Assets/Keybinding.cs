@@ -18,8 +18,8 @@ public class Keybinding : MonoBehaviour
         LoadKeybindings();
 
         // Update UI to display current keybindings
-        moveLeftInputField.text = moveLeftAction.action.GetBindingDisplayString();
-        moveRightInputField.text = moveRightAction.action.GetBindingDisplayString();
+        moveLeftInputField.text = "A"; // Set left key to "A"
+        moveRightInputField.text = "D"; // Set right key to "D"
         dropInputField.text = dropAction.action.GetBindingDisplayString();
     }
 
@@ -57,7 +57,7 @@ public class Keybinding : MonoBehaviour
             if (newKey)
             {
                 actionReference.action.ApplyBindingOverride(0, newKey.ToString());
-                inputField.text = actionReference.action.GetBindingDisplayString();
+                inputField.text = newKey.ToString(); // Update display with the new key
                 actionReference.action.Enable();
             }
         };

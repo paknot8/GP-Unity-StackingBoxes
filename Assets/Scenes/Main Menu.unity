@@ -4758,8 +4758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 951554591b1016441a83cc709ccd5c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLeftAction: {fileID: -2181055866687332057, guid: 72ec9ad919736164ea577013399e1147, type: 3}
-  moveRightAction: {fileID: -2181055866687332057, guid: 72ec9ad919736164ea577013399e1147, type: 3}
+  moveLeftAction: {fileID: -5851699396582318125, guid: 72ec9ad919736164ea577013399e1147, type: 3}
+  moveRightAction: {fileID: 2579170087714461594, guid: 72ec9ad919736164ea577013399e1147, type: 3}
   dropAction: {fileID: -6149546680340912923, guid: 72ec9ad919736164ea577013399e1147, type: 3}
   moveLeftInputField: {fileID: 459592117}
   moveRightInputField: {fileID: 1380190936}
@@ -5007,7 +5007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -153, y: -119.4}
+  m_AnchoredPosition: {x: -152.6, y: -118.3}
   m_SizeDelta: {x: 235.1428, y: 65.375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601819128
@@ -5030,7 +5030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SPACE (DROP BOX)
+  m_text: DROP THE BOX
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
