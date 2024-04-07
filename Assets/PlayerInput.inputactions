@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "e0ef698e-4d14-4553-83f4-959084fcc519",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "7a25fcf0-1f63-4438-86c8-9c7a52974eed",
@@ -84,17 +75,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a17d348a-595a-45a0-8ac5-a4e2f001a533",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
