@@ -66,7 +66,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "A",
                     "id": "75e5ff14-40ca-4785-a958-d6be32ce6e85",
                     "path": "2DVector",
                     "interactions": "",
@@ -88,7 +88,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "D",
                     "id": "e54e81e8-c887-486b-928f-cf409183936e",
                     "path": "2DVector",
                     "interactions": "",

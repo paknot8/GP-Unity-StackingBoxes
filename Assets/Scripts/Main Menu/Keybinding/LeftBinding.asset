@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: MoveLeft
   isComposite: 1
-  compositePartName: Left
+  compositePartName: 
   compositeNumber: 1

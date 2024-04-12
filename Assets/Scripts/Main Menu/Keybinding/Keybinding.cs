@@ -14,7 +14,7 @@ public class Keybinding : MonoBehaviour
 
     public Button[] allButtons;
 
- void Start()
+    void Start()
     {
         input = GetComponent<PlayerInput>();
         allButtons = FindObjectsByType<Button>(FindObjectsSortMode.InstanceID);
@@ -31,8 +31,10 @@ public class Keybinding : MonoBehaviour
     {
         SetBinding(button);
 
-        rebindingOperation = currentAction.PerformInteractiveRebinding().WithTargetBinding(currentBinding.compositeNumber).WithBindingGroup("Keyboard&Mouse").WithControlsHavingToMatchPath("<Keyboard>")
-            .WithControlsHavingToMatchPath("<Mouse>").WithCancelingThrough("<Keyboard>/escape").OnMatchWaitForAnother(0.1f).OnPotentialMatch(operation => CheckBinding())
+        rebindingOperation = currentAction.PerformInteractiveRebinding().WithTargetBinding(currentBinding.compositeNumber)
+        .WithBindingGroup("Keyboard&Mouse").WithControlsHavingToMatchPath("<Keyboard>")
+            .WithControlsHavingToMatchPath("<Mouse>").WithCancelingThrough("<Keyboard>/escape")
+            .OnMatchWaitForAnother(0.1f).OnPotentialMatch(operation => CheckBinding())
             .OnComplete(operation => { RebindComplete(button); }).OnCancel(operation => { RebindCancel(button); });
 
         button.GetComponentInChildren<TMP_Text>().text = "listening...";
