@@ -17,7 +17,18 @@ public class Keybinding : MonoBehaviour
     void Start()
     {
         input = GetComponent<PlayerInput>();
+        if (input == null)
+        {
+            Debug.LogError("PlayerInput component not found.");
+            return;
+        }
+
         allButtons = FindObjectsByType<Button>(FindObjectsSortMode.InstanceID);
+        if (allButtons == null || allButtons.Length == 0)
+        {
+            Debug.LogError("No buttons found.");
+            return;
+        }
 
         if (PlayerPrefs.HasKey("controls"))
         {
