@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249f45a4fd4c4a04f8fc1d9f4c7258b1, type: 3}
   m_Name: RightBinding
   m_EditorClassIdentifier: 
-  actionName: MoveRight
+  actionName: Move
   isComposite: 1
-  compositePartName: 
-  compositeNumber: 1
+  compositePartName: Left
+  compositeNumber: 2

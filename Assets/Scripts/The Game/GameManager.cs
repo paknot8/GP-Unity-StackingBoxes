@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 // GameManager class responsible for managing the game flow and objects.
 public class GameManager : MonoBehaviour
 {
@@ -119,9 +118,11 @@ public class GameManager : MonoBehaviour
         // Moves the current object according to input
         private void ObjectMovement()
         {
-            Vector2 moveInput = new Vector2(vector.x, vector.y);
-            moveInput.x *= currentObjectMoveSpeed * Time.deltaTime; // Multiply only by speed for horizontal movement
-            currentObject.transform.Translate(moveInput);
+            if(currentObject != null){
+                Vector2 moveInput = new(vector.x, vector.y);
+                moveInput.x *= currentObjectMoveSpeed * Time.deltaTime;
+                currentObject.transform.Translate(moveInput);
+            }
         }
 
         // Checks if the placeholder for the object is empty and moves it if necessary
@@ -152,15 +153,14 @@ public class GameManager : MonoBehaviour
 
         private void PauseGame()
         {
-            // Toggle the game's time scale between paused and normal
             if (isPlaying)
             {
-                Time.timeScale = 0f; // Pause the game
+                Time.timeScale = 0f;
                 isPlaying = false;
             }
             else
             {
-                Time.timeScale = 1f; // Resume the game
+                Time.timeScale = 1f;
                 isPlaying = true;
             }
             gameUI.OnGamePaused();
@@ -181,23 +181,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region New System Input
-        void OnMoveLeft(InputValue value)
-        {
-            vector = value.Get<Vector2>();
-            if (vector.x < 0)
-            {
-                ObjectMovement();
-            }
-        }
-
-        void OnMoveRight(InputValue value)
-        {
-            vector = value.Get<Vector2>();
-            if (value.isPressed && currentObject != null)
-            {
-                ObjectMovement();
-            }
-        }
+        void OnMove(InputValue value) => vector = value.Get<Vector2>();
 
         void OnDrop(InputValue value)
         {
