@@ -1,99 +1,125 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // Import Unity UI namespace
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI scoreText;
-    [SerializeField] private Image panelImage; // Use Image component for UI elements
-
+    [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
+    [SerializeField] private Image panelImage;
+    
+    [Header("Script Object References")]
     [SerializeField] private GameManager gameManager;
+
+    [Header("Object References")]
     [SerializeField] private GameObject gameScreenCanvas;
     [SerializeField] private GameObject gamePauseCanvas;
     [SerializeField] private GameObject gameOverCanvas;
 
+    [Header("Sound Effects")]
+    [SerializeField] private float transparacy;
+    private ScoreManager scoreManager;
+
+    [Header("Sound Effects")]
     [SerializeField] private AudioSource buttonClickSound;
 
-    [SerializeField] private float transparacy;
-
-    void Awake(){
-        transparacy = 0.8f;
-    }
-
-    void Start()
-    {
-        SetPanelTransparency(transparacy);
-    }
-
-    private void UpdateScoreText() => scoreText.text = $"Your Score : {gameManager.score}";
-
-    public void RestartGame()
-    {
-        ResetValues();
-        SceneManager.LoadScene(1); 
-    }
-
-    public void ToMainMenu()
-    {
-        ResetValues();
-        SceneManager.LoadScene(0);
-    }
-
-    public void ExitGame()
-    {
-        ResetValues();
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
-                Application.Quit();
-        #endif
-    }
-
-
-    private void ResetValues()
-    {
-        buttonClickSound.Play();
-        gameManager.isPlaying = true;
-        Time.timeScale = 1;
-        OnGamePaused();
-    }
-
-    public void OnGamePaused()
-    {
-        buttonClickSound.Play();
-        UpdateScoreText();
-        if (!gameManager.isPlaying)
+    #region Default Unity Functions
+        void Awake()
         {
-            gameScreenCanvas.SetActive(false);
-            gamePauseCanvas.SetActive(true);
+            transparacy = 0.8f;
+
+            // Get a reference to ScoreManager
+            scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                // Update the score text when the game UI starts
+                UpdateScoreText();
+            }
         }
-        else
+
+        void Start()
         {
-            gameScreenCanvas.SetActive(true);
-            gamePauseCanvas.SetActive(false);
+            SetPanelTransparency(transparacy);
         }
+    #endregion
+
+    private void UpdateScoreText()
+    {
+        // Load the top score from ScoreManager and update the UI
+        int topScore = scoreManager.LoadTopScore();
+        topScoreText.text = $"Top Score: {topScore}";
     }
 
-    public void OnGameOver()
-    {
-        UpdateScoreText();
-        if (!gameManager.isPlaying)
+    #region UI Buttons
+        public void RestartGame()
         {
-            gameScreenCanvas.SetActive(false);
-            gamePauseCanvas.SetActive(false);
-            gameOverCanvas.SetActive(true);
+            ResetValues();
+            SceneManager.LoadScene(1); 
         }
-    }
 
-    private void SetPanelTransparency(float alpha)
-    {
-        // Get the color of the panel's image
-        Color color = panelImage.color;
+        public void ToMainMenu()
+        {
+            ResetValues();
+            SceneManager.LoadScene(0);
+        }
 
-        // Set the alpha value of the color
-        color.a = alpha;
+        public void ExitGame()
+        {
+            ResetValues();
+            #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                    Application.Quit();
+            #endif
+        }
 
-        // Assign the modified color back to the panel's image
-        panelImage.color = color;
-    }
+        private void ResetValues()
+        {
+            buttonClickSound.Play();
+            gameManager.isPlaying = true;
+            Time.timeScale = 1;
+            OnGamePaused();
+        }
+
+        public void OnGamePaused()
+        {
+            buttonClickSound.Play();
+            UpdateScoreText();
+            if (!gameManager.isPlaying)
+            {
+                gameScreenCanvas.SetActive(false);
+                gamePauseCanvas.SetActive(true);
+            }
+            else
+            {
+                gameScreenCanvas.SetActive(true);
+                gamePauseCanvas.SetActive(false);
+            }
+        }
+
+        public void OnGameOver()
+        {
+            UpdateScoreText();
+            if (!gameManager.isPlaying)
+            {
+                gameScreenCanvas.SetActive(false);
+                gamePauseCanvas.SetActive(false);
+                gameOverCanvas.SetActive(true);
+            }
+        }
+    #endregion
+
+    #region Extra Functions
+        private void SetPanelTransparency(float alpha)
+        {
+            // Get the color of the panel's image
+            Color color = panelImage.color;
+
+            // Set the alpha value of the color
+            color.a = alpha;
+
+            // Assign the modified color back to the panel's image
+            panelImage.color = color;
+        }
+    #endregion
 }

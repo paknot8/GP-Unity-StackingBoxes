@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
         [SerializeField] private Transform objectHolder;
         [SerializeField] private TMPro.TextMeshProUGUI livesText;
         [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+
+        [Header("Sound Effects")]
         [SerializeField] private AudioSource scoreSound;
         [SerializeField] private AudioSource substractLifeSound;
         [SerializeField] private AudioSource gameOverSound;
@@ -55,6 +57,14 @@ public class GameManager : MonoBehaviour
             startingLives = 3;
             score = 0;
             isPlaying = true;
+
+            // Get a reference to ScoreManager
+            scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                // Load the score when the game starts
+                scoreManager.LoadTopScore();
+            }
         }
 
         void Start()
@@ -62,7 +72,6 @@ public class GameManager : MonoBehaviour
             SpawnNewObject();
             ResetLives();
             UpdateLivesText();
-            scoreManager.LoadScore();
         }
 
         void Update() => CheckPlaceholderIsEmpty();
@@ -169,13 +178,16 @@ public class GameManager : MonoBehaviour
         // Method to handle game over and save the score
         private void GameOver()
         {
-            if (isPlaying)
+            Time.timeScale = 0f; // Pause the game
+            isPlaying = false;
+            mainThemeMusic.Stop();
+            gameOverMusic.Play();
+            gameUI.OnGameOver();
+
+            // Save the score when the game is over
+            if (scoreManager != null)
             {
-                Time.timeScale = 0f; // Pause the game
-                isPlaying = false;
-                mainThemeMusic.Stop();
-                gameOverMusic.Play();
-                gameUI.OnGameOver();
+                scoreManager.SaveTopScore(score);
             }
         }
     #endregion

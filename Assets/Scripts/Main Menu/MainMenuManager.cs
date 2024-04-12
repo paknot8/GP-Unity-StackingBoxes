@@ -4,19 +4,25 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     // References
-    public SettingsManager settingsManager; 
-    public ScoreManager scoreManager;
+    public SettingsManager settingsManager;
+    public ScoreManager scoreManager; // Reference to ScoreManager
 
     [SerializeField] private GameObject mainMenuToggle; // GameObject to enable/disable
-    [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
 
     [SerializeField] private AudioSource buttonClickSound;
 
-    void Update(){
-        scoreManager.LoadScore();
-    }
+    [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
 
-    private void UpdateScoreText() => topScoreText.text = $"Your Top Score : {scoreManager.passedScore}";
+    // Called when the main menu is loaded
+    void Start()
+    {
+        // Load and display the top score
+        if (scoreManager != null && topScoreText != null)
+        {
+            int topScore = scoreManager.LoadTopScore();
+            topScoreText.text = $"Top Score: {topScore}";
+        }
+    }
 
     public void PlayGame()
     {

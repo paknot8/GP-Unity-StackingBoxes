@@ -2,31 +2,37 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {   
-    public int passedScore = 0;
-    private const string ScoreKey = "Score"; // Key for saving and loading the score
+    [HideInInspector] public int passedScore;
+    private const string TopScoreKey = "TopScore"; // Key for saving and loading the top score
 
-    // Method to save the score
-    public void SaveScore(int score)
+    // Method to save the top score
+    public void SaveTopScore(int topScore)
     {
-        passedScore = score;
-        PlayerPrefs.SetInt(ScoreKey, score);
-        PlayerPrefs.Save();
+        // Load the current top score
+        int currentTopScore = LoadTopScore();
+
+        // Compare the new top score with the current top score
+        if (topScore > currentTopScore)
+        {
+            // If the new score is higher, update the top score
+            PlayerPrefs.SetInt(TopScoreKey, topScore);
+            PlayerPrefs.Save();
+        }
     }
 
-    // Method to load the score
-    public void LoadScore()
+    // Method to load the top score
+    public int LoadTopScore()
     {
-        if (PlayerPrefs.HasKey(ScoreKey))
+        if (PlayerPrefs.HasKey(TopScoreKey))
         {
-            passedScore = PlayerPrefs.GetInt(ScoreKey);
-            // gameManager.UpdateTopScoreText(); // Update the score text after loading
+            return PlayerPrefs.GetInt(TopScoreKey);
         }
+        return 0; // If no top score saved yet, return 0
     }
 
     // Method to reset the score
     public void ResetScore()
     {
         passedScore = 0;
-        //gameManager.UpdateScoreText();
     }
 }
