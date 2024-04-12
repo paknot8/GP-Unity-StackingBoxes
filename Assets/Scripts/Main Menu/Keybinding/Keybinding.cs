@@ -6,12 +6,16 @@ using static UnityEngine.InputSystem.InputActionRebindingExtensions;
 
 public class Keybinding : MonoBehaviour
 {
+    // --- Player Input --- //
     private PlayerInput input;
     private RebindingOperation rebindingOperation;
 
+    // --- Scriptable Object --- //
     private KeybindingSO currentBinding;
     private InputAction currentAction;
 
+    // --- Showing all buttons currently on the screen --- //
+    [Header("Shows on Start")]
     public Button[] allButtons;
 
     void Start()
