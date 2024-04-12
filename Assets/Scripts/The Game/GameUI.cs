@@ -4,24 +4,27 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] private TMPro.TextMeshProUGUI scoreText;
-    [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
-    [SerializeField] private Image panelImage;
-    
-    [Header("Script Object References")]
-    [SerializeField] private GameManager gameManager;
+    #region Variables & References
+        [Header("UI Objects")]
+        [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+        [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
+        [SerializeField] private Image panelImage;
+        
+        [Header("Script Object References")]
+        [SerializeField] private GameManager gameManager;
 
-    [Header("Object References")]
-    [SerializeField] private GameObject gameScreenCanvas;
-    [SerializeField] private GameObject gamePauseCanvas;
-    [SerializeField] private GameObject gameOverCanvas;
+        [Header("Object References")]
+        [SerializeField] private GameObject gameScreenCanvas;
+        [SerializeField] private GameObject gamePauseCanvas;
+        [SerializeField] private GameObject gameOverCanvas;
 
-    [Header("Sound Effects")]
-    [SerializeField] private float transparacy;
-    private ScoreManager scoreManager;
+        [Header("Sound Effects")]
+        [SerializeField] private float transparacy;
+        private ScoreManager scoreManager;
 
-    [Header("Sound Effects")]
-    [SerializeField] private AudioSource buttonClickSound;
+        [Header("Sound Effects")]
+        [SerializeField] private AudioSource buttonClickSound;
+    #endregion
 
     #region Default Unity Functions
         void Awake()
