@@ -8,6 +8,7 @@ public class GameUI : MonoBehaviour
         [Header("UI Objects")]
         [SerializeField] private TMPro.TextMeshProUGUI scoreText;
         [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
+        [SerializeField] private TMPro.TextMeshProUGUI topScoreTextPaused;
         [SerializeField] private Image panelImage;
         
         [Header("Script Object References")]
@@ -51,6 +52,7 @@ public class GameUI : MonoBehaviour
         // Load the top score from ScoreManager and update the UI
         int topScore = scoreManager.LoadTopScore();
         topScoreText.text = $"Top Score: {topScore}";
+        topScoreTextPaused.text = $"Top Score: {topScore}";
     }
 
     #region UI Buttons
@@ -115,14 +117,9 @@ public class GameUI : MonoBehaviour
     #region Extra Functions
         private void SetPanelTransparency(float alpha)
         {
-            // Get the color of the panel's image
-            Color color = panelImage.color;
-
-            // Set the alpha value of the color
-            color.a = alpha;
-
-            // Assign the modified color back to the panel's image
-            panelImage.color = color;
+            Color color = panelImage.color; // Get the color of the panel's image
+            color.a = alpha;                // Set the alpha value of the color
+            panelImage.color = color;       // Assign the modified color back to the panel's image
         }
     #endregion
 }
