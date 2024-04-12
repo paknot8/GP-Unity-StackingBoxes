@@ -69,4 +69,8 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     #endregion
+
+    public void PlayButtonSound(){
+        buttonClickSound.Play();
+    }
 }
