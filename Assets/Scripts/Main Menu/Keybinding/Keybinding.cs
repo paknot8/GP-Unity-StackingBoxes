@@ -31,8 +31,11 @@ public class Keybinding : MonoBehaviour
     {
         SetBinding(button);
 
+        // Disable the action before rebinding
+        currentAction.Disable();
+
         rebindingOperation = currentAction.PerformInteractiveRebinding().WithTargetBinding(currentBinding.compositeNumber)
-        .WithBindingGroup("Keyboard&Mouse").WithControlsHavingToMatchPath("<Keyboard>")
+            .WithBindingGroup("Keyboard&Mouse").WithControlsHavingToMatchPath("<Keyboard>")
             .WithControlsHavingToMatchPath("<Mouse>").WithCancelingThrough("<Keyboard>/escape")
             .OnMatchWaitForAnother(0.1f).OnPotentialMatch(operation => CheckBinding())
             .OnComplete(operation => { RebindComplete(button); }).OnCancel(operation => { RebindCancel(button); });
@@ -83,6 +86,10 @@ public class Keybinding : MonoBehaviour
         rebindingOperation.Dispose();
         UpdateButton(button);
         PlayerPrefs.SetString("controls", input.actions.SaveBindingOverridesAsJson());
+
+        // Re-enable the action
+        currentAction.Enable();
+
         EnableAllButtons();
     }
 
@@ -90,6 +97,10 @@ public class Keybinding : MonoBehaviour
     {
         rebindingOperation.Dispose();
         UpdateButton(button);
+
+        // Re-enable the action
+        currentAction.Enable();
+
         EnableAllButtons();
     }
 
