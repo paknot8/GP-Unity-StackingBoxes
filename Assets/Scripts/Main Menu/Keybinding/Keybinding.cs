@@ -16,8 +16,7 @@ public class Keybinding : MonoBehaviour
 
     void Start()
     {
-        input = GetComponent<PlayerInput>();
-        if (input == null)
+        if (!TryGetComponent<PlayerInput>(out input))
         {
             Debug.LogError("PlayerInput component not found.");
             return;
