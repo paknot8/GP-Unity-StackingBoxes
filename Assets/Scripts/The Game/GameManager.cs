@@ -178,17 +178,16 @@ public class GameManager : MonoBehaviour
         // Method to handle game over and save the score
         private void GameOver()
         {
-            Time.timeScale = 0f; // Pause the game
-            isPlaying = false;
-            mainThemeMusic.Stop();
-            gameOverMusic.Play();
-            gameUI.OnGameOver();
-
             // Save the score when the game is over
             if (scoreManager != null)
             {
                 scoreManager.SaveTopScore(score);
             }
+            Time.timeScale = 0f; // Pause the game
+            isPlaying = false;
+            mainThemeMusic.Stop();
+            gameOverMusic.Play();
+            gameUI.OnGameOver();
         }
     #endregion
 
