@@ -3,68 +3,70 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // References
+    [Header("References to Objects Scripts")]
     public SettingsManager settingsManager;
-    public ScoreManager scoreManager; // Reference to ScoreManager
+    public ScoreManager scoreManager;
 
+    [Header("References to Objects")]
     [SerializeField] private GameObject mainMenuToggle; // GameObject to enable/disable
-
     [SerializeField] private AudioSource buttonClickSound;
-
     [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
 
-    // Called when the main menu is loaded
+    #region Default Unity Functions
     void Start()
-    {
-        // Load and display the top score
-        if (scoreManager != null && topScoreText != null)
         {
-            int topScore = scoreManager.LoadTopScore();
-            topScoreText.text = $"Top Score: {topScore}";
+            // Load and display the top score
+            if (scoreManager != null && topScoreText != null)
+            {
+                int topScore = scoreManager.LoadTopScore();
+                topScoreText.text = $"Top Score: {topScore}";
+            }
         }
-    }
+    #endregion
 
-    public void PlayGame()
-    {
-        buttonClickSound.Play();
-        SceneManager.LoadScene(1);
-    }
+    #region Buttons
+        public void PlayGame()
+        {
+            buttonClickSound.Play();
+            SceneManager.LoadScene(1);
+        }
 
-    public void QuitGame()
-    {
-        buttonClickSound.Play();
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
-                Application.Quit();
-        #endif
-    }
+        public void GoToSettings()
+        {
+            buttonClickSound.Play();
+            if (settingsManager != null)
+            {
+                mainMenuToggle.SetActive(false);
+                settingsManager.EnableObject();
+            }
+            else
+            {
+                Debug.LogWarning("Settings Manager not assigned.");
+            }
+        }
 
-    public void GoToSettings()
-    {
-        buttonClickSound.Play();
-        if (settingsManager != null)
+        public void QuitGame()
         {
-            mainMenuToggle.SetActive(false);
-            settingsManager.EnableObject();
+            buttonClickSound.Play();
+            #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                    Application.Quit();
+            #endif
         }
-        else
-        {
-            Debug.LogWarning("Settings Manager not assigned.");
-        }
-    }
 
-    public void BackToMainMenu()
-    {
-        buttonClickSound.Play();
-        if (mainMenuToggle != null)
+        public void BackToMainMenu()
         {
-            mainMenuToggle.SetActive(true);
-            settingsManager.DisableObject();
+            buttonClickSound.Play();
+            if (mainMenuToggle != null)
+            {
+                mainMenuToggle.SetActive(true);
+                settingsManager.DisableObject();
+            }
+            else
+            {
+                Debug.LogWarning("No object assigned to toggle.");
+            }
         }
-        else
-        {
-            Debug.LogWarning("No object assigned to toggle.");
-        }
-    }
+    #endregion
 }
