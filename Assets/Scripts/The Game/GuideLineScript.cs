@@ -8,7 +8,7 @@ public class GuideLineScript : MonoBehaviour
 
     void Awake(){
         guideLines = GetComponent<Renderer>();
-        transparancy = 0.2f;
+        transparancy = 1f;
     }
 
     void Start() => ObjectTransparancy();

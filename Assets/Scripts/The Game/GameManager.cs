@@ -36,17 +36,18 @@ public class GameManager : MonoBehaviour
         private Vector2 vector;
         public int score;
 
-        // restricted colors
-        [HideInInspector] private readonly Color[] restrictedColors =
-        {
-            new(0.1f, 0.5f, 0.1f),  // Dark green
-            new(0.4f, 0.1f, 0.4f),  // Dark purple
-            new(0.1f, 0.1f, 0.5f),  // Dark blue
-            new(0f, 0f, 0f),        // Black
-            new(0.5f, 0.1f, 0.1f),  // Dark red
-            new(0.3f, 0.3f, 0f),    // Dark yellow
-            new(0.1f, 0.4f, 0.4f),  // Dark cyan
-        };
+        // --- Used in Gold 2 as Color change now has texture and prefabs ---
+        // // restricted colors
+        // [HideInInspector] private readonly Color[] restrictedColors =
+        // {
+        //     new Color(0.3f, 0.7f, 0.3f),  // Light green
+        //     new Color(0.7f, 0.3f, 0.7f),  // Light purple
+        //     new Color(0.3f, 0.3f, 0.7f),  // Light blue
+        //     new Color(0.5f, 0.5f, 0.5f),  // Gray
+        //     new Color(0.7f, 0.3f, 0.3f),  // Light red
+        //     new Color(0.5f, 0.5f, 0.1f),  // Light yellow
+        //     new Color(0.3f, 0.7f, 0.7f)   // Light cyan
+        // };
     #endregion
 
     #region Default Unity Methods
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
             Transform selectedPrefab = objectPrefabs[randomIndex];
 
             // Select a random color from the restricted colors array
-            Color selectedColor = restrictedColors[Random.Range(0, restrictedColors.Length)];
+            // Color selectedColor = restrictedColors[Random.Range(0, restrictedColors.Length)];
 
             // Spawn position based on camera position and height
             Vector3 cameraPosition = Camera.main.transform.position;
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
 
             // Instantiate the object and set its color
             currentObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-            currentObject.GetComponent<SpriteRenderer>().color = selectedColor;
+            // currentObject.GetComponent<SpriteRenderer>().color = selectedColor;
             currentRigidbody = currentObject.GetComponent<Rigidbody2D>();
         }
 
