@@ -10,7 +10,6 @@ public class GameUI : MonoBehaviour
         [SerializeField] private TMPro.TextMeshProUGUI scoreTextGameOverText;
         [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
         [SerializeField] private TMPro.TextMeshProUGUI topScoreTextPaused;
-        [SerializeField] private Image panelImage;
         
         [Header("Script Object References")]
         [SerializeField] private GameManager gameManager;

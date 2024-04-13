@@ -4,17 +4,19 @@ public class AudioSettingsLoader : MonoBehaviour
 {
     void Start()
     {
-        LoadVolumeLevels();
+        LoadMusicLevels();
+        LoadSoundLevels();
     }
 
-    void LoadVolumeLevels()
+    void LoadMusicLevels()
     {
-        // Load volume settings from PlayerPrefs
         float musicVolume = PlayerPrefs.GetFloat("musicVolume", 1);
-        float soundVolume = PlayerPrefs.GetFloat("soundVolume", 1);
-
-        // Apply loaded music volume to objects tagged as "Music" and "Sound" in the scene
         ApplyVolumeToTaggedObjects("Music", musicVolume);
+    }
+
+    void LoadSoundLevels()
+    {
+        float soundVolume = PlayerPrefs.GetFloat("soundVolume", 1);
         ApplyVolumeToTaggedObjects("Sound", soundVolume);
     }
 
