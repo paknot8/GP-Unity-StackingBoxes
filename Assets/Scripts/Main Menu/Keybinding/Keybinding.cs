@@ -59,52 +59,29 @@ public class Keybinding : MonoBehaviour
         rebindingOperation.Start();
     }
 
-private void CheckBinding()
-{
-    string displayName = rebindingOperation.selectedControl.displayName;
-    string shortDisplayName = rebindingOperation.selectedControl.shortDisplayName;
-
-    // Iterate through all action maps in the PlayerInput
-    foreach (var actionMap in input.actions.actionMaps)
+    private void CheckBinding()
     {
-        // Iterate through all bindings in the action map
-        foreach (var binding in actionMap.bindings)
+        string displayName = rebindingOperation.selectedControl.displayName;
+        string shortDisplayName = rebindingOperation.selectedControl.shortDisplayName;
+
+        // Iterate through all action maps in the PlayerInput
+        foreach (var actionMap in input.actions.actionMaps)
         {
-            // Check if the binding matches the selected control's display name or short display name
-            if (binding.ToDisplayString().Equals(displayName) || binding.ToDisplayString().Equals(shortDisplayName))
+            // Iterate through all bindings in the action map
+            foreach (var binding in actionMap.bindings)
             {
-                // If the control is already bound to another action, cancel the rebinding operation
-                rebindingOperation.Cancel();
-                return;
+                // Check if the binding matches the selected control's display name or short display name
+                if (binding.ToDisplayString().Equals(displayName) || binding.ToDisplayString().Equals(shortDisplayName))
+                {
+                    // If the control is already bound to another action, cancel the rebinding operation
+                    rebindingOperation.Cancel();
+                    return;
+                }
             }
         }
+        // If no conflicting bindings are found, complete the rebinding operation
+        rebindingOperation.Complete();
     }
-    // If no conflicting bindings are found, complete the rebinding operation
-    rebindingOperation.Complete();
-}
-
-
-
-
-    // private void CheckBinding()
-    // {
-    //     string displayName = rebindingOperation.selectedControl.displayName;
-    //     string shortDisplayName = rebindingOperation.selectedControl.shortDisplayName;
-
-    //     //foreach (var binding in input.actions.bindings)
-    //     foreach (var control in input.actions.bindings)
-    //     {
-    //         if(control.groups.Contains("Keyboard&Mouse"))
-    //         {
-    //             if (control.ToDisplayString().Equals(displayName) || control.ToDisplayString().Equals(shortDisplayName))
-    //             {
-    //                 rebindingOperation.Cancel();
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     rebindingOperation.Complete();
-    // }
 
     private void UpdateButton(Button button)
     {
