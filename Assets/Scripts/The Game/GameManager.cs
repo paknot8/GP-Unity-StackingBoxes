@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
         // UI Text updates
         private void ResetLives() => livesRemaining = startingLives;
-        private void UpdateLivesText() => livesText.text = $"HP: {livesRemaining}";
+        private void UpdateLivesText() => livesText.text = $"{livesRemaining}";
         private void UpdateScoreText() => scoreText.text = $"Score: {score}";
 
         private void PauseGame()
