@@ -908,7 +908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -144.5, y: 8.8}
+  m_AnchoredPosition: {x: -144.5, y: 8.799988}
   m_SizeDelta: {x: 140, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &376179478
@@ -1604,7 +1604,7 @@ GameObject:
   - component: {fileID: 694903200}
   - component: {fileID: 694903199}
   m_Layer: 5
-  m_Name: GamePause_Text
+  m_Name: GameOver_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3340,8 +3340,8 @@ RectTransform:
   m_Children:
   - {fileID: 1447317457}
   - {fileID: 694903198}
-  - {fileID: 899421241}
   - {fileID: 2021997596}
+  - {fileID: 899421241}
   - {fileID: 1429161199}
   - {fileID: 544326617}
   - {fileID: 1073908664}
@@ -3413,7 +3413,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1216038081
 GameObject:
@@ -4270,6 +4270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2021997597}
+  scoreTextGameOverText: {fileID: 2021997597}
   topScoreText: {fileID: 899421242}
   topScoreTextPaused: {fileID: 583068443}
   panelImage: {fileID: 787299371}
@@ -4313,8 +4314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.9852295, y: 0.49243164}
+  m_SizeDelta: {x: 26.9572, y: 70.0161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447317458
 MonoBehaviour:
@@ -4329,7 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5217,7 +5218,7 @@ GameObject:
   - component: {fileID: 2021997598}
   - component: {fileID: 2021997597}
   m_Layer: 5
-  m_Name: Score_Text
+  m_Name: GameOverScore_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

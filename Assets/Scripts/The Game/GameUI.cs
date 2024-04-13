@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour
     #region Variables & References
         [Header("UI Objects")]
         [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+        [SerializeField] private TMPro.TextMeshProUGUI scoreTextGameOverText;
         [SerializeField] private TMPro.TextMeshProUGUI topScoreText;
         [SerializeField] private TMPro.TextMeshProUGUI topScoreTextPaused;
         [SerializeField] private Image panelImage;
@@ -53,6 +54,7 @@ public class GameUI : MonoBehaviour
         int topScore = scoreManager.LoadTopScore();
         topScoreText.text = $"Top Score: {topScore}";
         topScoreTextPaused.text = $"Top Score: {topScore}";
+        scoreTextGameOverText.text = $"Score: {gameManager.score}";
     }
 
     #region UI Buttons
