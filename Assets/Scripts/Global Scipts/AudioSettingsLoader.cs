@@ -26,8 +26,7 @@ public class AudioSettingsLoader : MonoBehaviour
         // Apply volume settings to all AudioSources in the tagged objects
         foreach (GameObject obj in taggedObjects)
         {
-            AudioSource audioSource = obj.GetComponent<AudioSource>();
-            if (audioSource != null)
+            if (obj.TryGetComponent<AudioSource>(out var audioSource))
             {
                 audioSource.volume = volume;
             }
