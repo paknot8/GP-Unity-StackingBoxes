@@ -3128,7 +3128,6 @@ MonoBehaviour:
   scoreText: {fileID: 341493034}
   scoreSound: {fileID: 890076758}
   substractLifeSound: {fileID: 1540406179}
-  gameOverSound: {fileID: 1665641261}
   mainThemeMusic: {fileID: 7942309938165310583}
   gameOverMusic: {fileID: 1387110888}
   maxHeightLine: {fileID: 1285067321}
