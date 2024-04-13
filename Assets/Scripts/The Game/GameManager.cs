@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
         [SerializeField] private AudioSource substractLifeSound;
         [SerializeField] private AudioSource mainThemeMusic;
         [SerializeField] private AudioSource gameOverMusic;
+        [SerializeField] private AudioSource onPauseSound;
 
-        // Script References
+        [Header("Script References")]
         [SerializeField] private MaxHeightManager maxHeightLine;
         [SerializeField] private GameUI gameUI;
         [SerializeField] private ScoreManager scoreManager;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
         public float currentObjectMoveSpeed;
         public int startingLives;
 
-        // Private variables
+        // Other Variables
         private Transform currentObject; // Current spawned object
         private Rigidbody2D currentRigidbody; // Rigidbody of the object
         private int livesRemaining;
@@ -202,6 +203,7 @@ public class GameManager : MonoBehaviour
         {
             if (value.isPressed)
             {
+                onPauseSound.Play();
                 PauseGame();
             }
         }

@@ -14,15 +14,12 @@ public class GameUI : MonoBehaviour
         
         [Header("Script Object References")]
         [SerializeField] private GameManager gameManager;
+        [SerializeField] private ScoreManager scoreManager;
 
         [Header("Object References")]
         [SerializeField] private GameObject gameScreenCanvas;
         [SerializeField] private GameObject gamePauseCanvas;
         [SerializeField] private GameObject gameOverCanvas;
-
-        [Header("Sound Effects")]
-        [SerializeField] private float transparacy;
-        private ScoreManager scoreManager;
 
         [Header("Sound Effects")]
         [SerializeField] private AudioSource buttonClickSound;
@@ -31,8 +28,6 @@ public class GameUI : MonoBehaviour
     #region Default Unity Functions
         void Awake()
         {
-            transparacy = 0.8f;
-
             // Get a reference to ScoreManager
             scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
@@ -40,11 +35,6 @@ public class GameUI : MonoBehaviour
                 // Update the score text when the game UI starts
                 UpdateScoreText();
             }
-        }
-
-        void Start()
-        {
-            //SetPanelTransparency(transparacy);
         }
     #endregion
 
@@ -116,12 +106,10 @@ public class GameUI : MonoBehaviour
         }
     #endregion
 
-    #region Extra Functions
-        // private void SetPanelTransparency(float alpha)
-        // {
-        //     Color color = panelImage.color; // Get the color of the panel's image
-        //     color.a = alpha;                // Set the alpha value of the color
-        //     panelImage.color = color;       // Assign the modified color back to the panel's image
-        // }
+    #region Play Sound
+        public void PlayButtonClickSound()
+        {
+            buttonClickSound.Play();
+        }
     #endregion
 }

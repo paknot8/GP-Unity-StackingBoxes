@@ -450,6 +450,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1442981340}
+        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        m_MethodName: PlayButtonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &138344173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,6 +1300,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1442981340}
+        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        m_MethodName: PlayButtonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &544326619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,6 +1570,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1442981340}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: ToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1442981340}
+        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        m_MethodName: PlayButtonClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2714,6 +2750,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1442981340}
+        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        m_MethodName: PlayButtonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1073908666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3203,6 +3251,7 @@ MonoBehaviour:
   substractLifeSound: {fileID: 1540406179}
   mainThemeMusic: {fileID: 7942309938165310583}
   gameOverMusic: {fileID: 1387110888}
+  onPauseSound: {fileID: 1795062008}
   maxHeightLine: {fileID: 1285067321}
   gameUI: {fileID: 1442981340}
   scoreManager: {fileID: 473371192}
@@ -3300,7 +3349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1137994987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3899,6 +3948,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1442981340}
+        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        m_MethodName: PlayButtonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1429161201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4121,11 +4182,12 @@ MonoBehaviour:
   topScoreTextPaused: {fileID: 583068443}
   panelImage: {fileID: 0}
   gameManager: {fileID: 1115472742}
+  scoreManager: {fileID: 0}
   gameScreenCanvas: {fileID: 94211127}
   gamePauseCanvas: {fileID: 339226815}
   gameOverCanvas: {fileID: 1137994986}
-  transparacy: 1
   buttonClickSound: {fileID: 1795062008}
+  transparacy: 1
 --- !u!1 &1447317456
 GameObject:
   m_ObjectHideFlags: 0
