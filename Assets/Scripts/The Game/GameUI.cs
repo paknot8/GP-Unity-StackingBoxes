@@ -44,7 +44,7 @@ public class GameUI : MonoBehaviour
 
         void Start()
         {
-            SetPanelTransparency(transparacy);
+            //SetPanelTransparency(transparacy);
         }
     #endregion
 
@@ -117,11 +117,11 @@ public class GameUI : MonoBehaviour
     #endregion
 
     #region Extra Functions
-        private void SetPanelTransparency(float alpha)
-        {
-            Color color = panelImage.color; // Get the color of the panel's image
-            color.a = alpha;                // Set the alpha value of the color
-            panelImage.color = color;       // Assign the modified color back to the panel's image
-        }
+        // private void SetPanelTransparency(float alpha)
+        // {
+        //     Color color = panelImage.color; // Get the color of the panel's image
+        //     color.a = alpha;                // Set the alpha value of the color
+        //     panelImage.color = color;       // Assign the modified color back to the panel's image
+        // }
     #endregion
 }
