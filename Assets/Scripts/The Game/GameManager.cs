@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         public void SubtractLifePoint()
         {
             livesRemaining = Mathf.Max(0, livesRemaining - 1); // ensure that the number never goes to 0 when substracting
-            livesText.text = $"{livesRemaining}";
+            UpdateLivesText();
             if (livesRemaining > 0) substractLifeSound.Play();
             UpdateScoreText();
 
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
         // UI Text updates
         private void ResetLives() => livesRemaining = startingLives;
-        private void UpdateLivesText() => livesText.text = $"{livesRemaining}";
+        private void UpdateLivesText() => livesText.text = $"HP: {livesRemaining}";
         private void UpdateScoreText() => scoreText.text = $"Score: {score}";
 
         private void PauseGame()
