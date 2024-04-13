@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class ScreenResolution : MonoBehaviour
 {
@@ -10,14 +11,37 @@ public class ScreenResolution : MonoBehaviour
     private List<Resolution> filteredResolutions;
     private int currentResolutionIndex = 0;
 
+    void Awake()
+    {
+        MoveToPrimaryDisplayGameStart();
+    }
+
+    // Call method in start or awake
+    // Unity Bug fix when you have multiple display with Window 10
+    // It shows in display 2 instead of Primary Display number 1
+    // Unity2021 bug where the secondary monitor was being chosen when the game launches in a release build.
+    void MoveToPrimaryDisplayGameStart(){
+        #if !UNITY_EDITOR
+            StartCoroutine(MoveToPrimaryDisplay());
+        #endif
+    }
+    
+    IEnumerator MoveToPrimaryDisplay()
+    {
+        List<DisplayInfo> displays = new();
+        Screen.GetDisplayLayout(displays);
+        if (displays?.Count > 0)
+        {
+            var moveOperation = Screen.MoveMainWindowTo(displays[0], new Vector2Int(displays[0].width / 2, displays[0].height / 2));
+            yield return moveOperation;
+        }
+    }
+
     [System.Obsolete]
     private void Start()
     {
         InitializeResolutionOptions();
         resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
-
-        // Ensure the game starts on the main display (Display 1)
-        MoveGameWindowToMainDisplay();
     }
 
     [System.Obsolete]
@@ -116,22 +140,6 @@ public class ScreenResolution : MonoBehaviour
         PlayerPrefs.SetInt("ScreenWidth", screenWidth);
         PlayerPrefs.SetInt("ScreenHeight", screenHeight);
         PlayerPrefs.Save();
-    }
-
-    private void MoveGameWindowToMainDisplay()
-    {
-        // Find the main display
-        Display mainDisplay = Display.displays[0];
-
-        if (mainDisplay != null)
-        {
-            // Set the game window position to the main display
-            Screen.SetResolution(mainDisplay.systemWidth, mainDisplay.systemHeight, true);
-        }
-        else
-        {
-            Debug.LogWarning("Main display not found.");
-        }
     }
 }
 
