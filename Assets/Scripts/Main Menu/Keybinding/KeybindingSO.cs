@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Scriptable Object Creator for the keybinding
 [CreateAssetMenu(fileName = "New Keybinding", menuName = "ScriptableObjects/Keybinding")]
 public class KeybindingSO : ScriptableObject
 {

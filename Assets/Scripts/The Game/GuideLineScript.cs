@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GuideLineScript : MonoBehaviour
 {
-    // Reference to the Renderer component
+    [Header("Variables & References")]
     [HideInInspector] private Renderer guideLines;
     private float transparancy;
 

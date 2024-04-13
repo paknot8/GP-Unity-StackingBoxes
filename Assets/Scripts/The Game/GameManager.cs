@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         [Header("Sound Effects")]
         [SerializeField] private AudioSource scoreSound;
         [SerializeField] private AudioSource substractLifeSound;
-        [SerializeField] private AudioSource gameOverSound;
         [SerializeField] private AudioSource mainThemeMusic;
         [SerializeField] private AudioSource gameOverMusic;
 
@@ -150,7 +149,6 @@ public class GameManager : MonoBehaviour
             // Load main menu scene if lives run out
             if (livesRemaining == 0)
             {
-                gameOverSound.Play();
                 GameOver();
             }
         }
